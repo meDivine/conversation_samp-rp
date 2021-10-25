@@ -15,9 +15,17 @@ class CreateConversationsTable extends Migration
     {
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('type', 1);
+            $table->tinyInteger('type');
             $table->string('social', '64');
-            $table->string('social', '64');
+            $table->string('nickname', '64');
+            $table->text('about');
+            $table->string('real name');
+            $table->text('leaderships');
+            $table->integer('who_start');
+            $table->integer('agree');
+            $table->integer('disagree');
+            $table->integer('neutral');
+            $table->integer('who_close')->nullable();
             $table->timestamps();
         });
     }

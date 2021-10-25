@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,17 +18,25 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->integer('vk_id', 11);
+            $table->integer('vk_id');
             $table->text('avatar');
             $table->string('nickname',32);
-            $table->bool('punishmentsLog')->default(false);
-            $table->bool('captureLog')->default(false);
-            $table->bool('ipAuthLog')->default(false);
-            $table->bool('GangBangLog')->default(false);
-            $table->bool('nickNameLog')->default(false);
-            $table->bool('inviteGiverankLog')->default(false);
+            $table->boolean('punishmentsLog')->default(false);
+            $table->boolean('captureLog')->default(false);
+            $table->boolean('ipAuthLog')->default(false);
+            $table->boolean('GangBangLog')->default(false);
+            $table->boolean('nickNameLog')->default(false);
+            $table->boolean('inviteGiverankLog')->default(false);
+            $table->rememberToken();
             $table->timestamps();
         });
+        User::create([
+            'name' => 'Александр',
+            'avatar' => 'https://cs13.pikabu.ru/avatars/3425/x3425772-1402976383.png',
+            'nickname' => 'Lucian_Butchers',
+            'email' => 'test@test',
+            'vk_id' => '228',
+        ]);
     }
 
     /**

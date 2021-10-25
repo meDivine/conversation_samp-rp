@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServerLogsTable extends Migration
+class CreateConvStatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateServerLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('server_logs', function (Blueprint $table) {
+        Schema::create('conv_stats', function (Blueprint $table) {
             $table->id();
-            $table->integer('userid');
+            $table->integer('conv_id');
             $table->string('nick');
-            $table->string('action');
-            $table->string('ip');
-            $table->string('city');
-            $table->string('region');
-            $table->string('country');
-            $table->string('vpn');
+            $table->json('warns');
+            $table->json('kicks');
+            $table->json('bans');
+            $table->json('report_log');
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ class CreateServerLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('server_logs');
+        Schema::dropIfExists('conv_stats');
     }
 }
