@@ -15,6 +15,14 @@ class CreateServerLogsTable extends Migration
     {
         Schema::create('server_logs', function (Blueprint $table) {
             $table->id();
+            $table->int('userid');
+            $table->string('nick');
+            $table->string('action');
+            $table->string('ip');
+            $table->string('city');
+            $table->string('region');
+            $table->string('country');
+            $table->string('vpn');
             $table->timestamps();
         });
     }
