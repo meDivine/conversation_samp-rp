@@ -14,7 +14,7 @@ use App\Http\Controllers\VkontakteAuth;
 */
 
 Route::get('/', function () {
-    return view('base');
-});
+    return view('components.homepage.home');
+})->name('home');
 
 Route::get('/testauth', [VkontakteAuth::class, 'test']);

@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vertical Navbar - Mazer Admin Dashboard</title>
+    @yield('title')
+
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -30,47 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="sidebar-menu">
-                <ul class="menu">
-                    <li class="sidebar-title">Menu</li>
-
-                    <li class="sidebar-item  ">
-                        <a href="index.html" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item active has-sub">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-1x2-fill"></i>
-                            <span>Layouts</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-title">Forms &amp; Tables</li>
-
-
-                    <li class="sidebar-item  has-sub">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-person-badge-fill"></i>
-                            <span>Authentication</span>
-                        </a>
-                        <ul class="submenu ">
-                            <li class="submenu-item ">
-                                <a href="auth-login.html">Login</a>
-                            </li>
-                            <li class="submenu-item ">
-                                <a href="auth-register.html">Register</a>
-                            </li>
-                            <li class="submenu-item ">
-                                <a href="auth-forgot-password.html">Forgot Password</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                </ul>
-            </div>
+            @include('base-components.sidebar')
             <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
         </div>
     </div>
@@ -114,37 +75,7 @@
                                 </ul>
                             </li>
                         </ul>
-                        <div class="dropdown">
-                            <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                <div class="user-menu d-flex">
-                                    <div class="user-name text-end me-3">
-                                        <h6 class="mb-0 text-gray-600">John Ducky</h6>
-                                        <p class="mb-0 text-sm text-gray-600">Administrator</p>
-                                    </div>
-                                    <div class="user-img d-flex align-items-center">
-                                        <div class="avatar avatar-md">
-                                            <img src="{{ Auth::user()->avatar }}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                <li>
-                                    <h6 class="dropdown-header">Hello, John!</h6>
-                                </li>
-                                <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
-                                        Profile</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                                        Settings</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i>
-                                        Wallet</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#"><i
-                                            class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
-                            </ul>
-                        </div>
+                        @include('base-components.dropdownmenu')
                     </div>
                 </div>
             </nav>
@@ -152,50 +83,10 @@
         <div id="main-content">
 
             <div class="page-heading">
-                <div class="page-title">
-                    <div class="row">
-                        <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>Vertical Layout with Navbar</h3>
-                            <p class="text-subtitle text-muted">Navbar will appear in top of the page.</p>
-                        </div>
-                        <div class="col-12 col-md-6 order-md-2 order-first">
-                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Layout Vertical Navbar
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-                <section class="section">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Example Content test</h4>
-                        </div>
-                        <div class="card-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quas omnis
-                            laudantium tempore
-                            exercitationem, expedita aspernatur sed officia asperiores unde tempora maxime odio
-                            reprehenderit
-                            distinctio incidunt! Vel aspernatur dicta consequatur!
-                        </div>
-                    </div>
-                </section>
+                @yield('header')
+                @yield('content')
             </div>
-
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
-                    </div>
-                    <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                            by <a href="https://ahmadsaugi.com">Saugi</a></p>
-                    </div>
-                </div>
-            </footer>
+            @include('base-components.footer')
         </div>
     </div>
 </div>
