@@ -37,7 +37,9 @@ return [
     ],
 
     'logsbot' => [
-        ''
+        'bot_name' => env('BOT_NAME'),
+        'bot_password' => env('BOT_PASSWORD'),
+        'bot_secret' => env('BOT_SECRET')
     ],
 
 

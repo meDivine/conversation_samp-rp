@@ -67,7 +67,7 @@ class Editor extends Component
         $this->validate();
         $uid = Auth::id();
         $conversation = new conversation();
-        return  $conversation->createConversation(0, $this->social, $this->gamenick, $this->about, $this->realname, $this->leaderships, $uid);
+        return $conversation->createConversation(0, $this->social, $this->gamenick, $this->about, $this->realname, $this->leaderships, $uid);
     }
     public function render()
     {
