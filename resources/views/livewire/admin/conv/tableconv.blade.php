@@ -24,6 +24,7 @@
                                 <td class="text-bold-500">Michael Right</td>
                                 <td>$15/hr</td>
                                 <td class="text-bold-500">UI/UX</td>
+                                <td class="text-bold-500">sd</td>
                             </tr>
                             </tbody>
                         </table>

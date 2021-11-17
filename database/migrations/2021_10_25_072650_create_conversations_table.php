@@ -19,7 +19,7 @@ class CreateConversationsTable extends Migration
             $table->string('social', '64');
             $table->string('nickname', '64');
             $table->text('about');
-            $table->string('real name');
+            $table->string('real_name');
             $table->text('leaderships');
             $table->integer('who_start');
             $table->integer('agree');

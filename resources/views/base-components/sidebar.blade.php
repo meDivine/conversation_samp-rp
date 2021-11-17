@@ -14,6 +14,17 @@
                 <i class="bi bi-grid-1x2-fill"></i>
                 <span>Добавить</span>
             </a>
+            <ul class="submenu ">
+                <li class="submenu-item ">
+                    <a href="auth-login.html">Администратора</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-register.html">Игрового помошника</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Голосование</a>
+                </li>
+            </ul>
         </li>
 
         <li class="sidebar-title">Остальное</li>

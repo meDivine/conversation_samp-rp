@@ -36,5 +36,9 @@ return [
         'redirect' => env('VKONTAKTE_REDIRECT_URI')
     ],
 
+    'logsbot' => [
+        ''
+    ],
+
 
 ];

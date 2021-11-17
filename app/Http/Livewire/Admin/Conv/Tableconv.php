@@ -7,15 +7,10 @@ use Livewire\Component;
 
 class Tableconv extends Component
 {
-    public $table;
-
-    private function getTable() {
-        return conversation::all();
-    }
 
     public function render()
     {
-        $this->table = $this->getTable();
-        return view('livewire.admin.conv.tableconv');
+        $all = conversation::all();
+        return view('livewire.admin.conv.tableconv', compact('all'));
     }
 }

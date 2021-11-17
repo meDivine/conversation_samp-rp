@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConversationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VkontakteAuth;
 /*
@@ -17,4 +18,11 @@ Route::get('/', function () {
     return view('components.homepage.home');
 })->name('home');
 
-Route::get('/testauth', [VkontakteAuth::class, 'test']);
+Route::get('/addadmin', function () {
+    return view('addadmin');
+})->name('addadmin');
+
+Route::get('/test', [ConversationController::class, 'parse']);
+
+Route::get('/t', [VkontakteAuth::class, 'test']);
+
