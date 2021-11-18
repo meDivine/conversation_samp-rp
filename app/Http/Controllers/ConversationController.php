@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bot;
+use App\Models\conversation;
 use GuzzleHttp\Client;
 
 class ConversationController extends Controller
@@ -16,11 +17,18 @@ class ConversationController extends Controller
     public function parse()
     {
         $bot = new Bot();
-        $capture = $bot->getCaptureLog();
-        foreach ($capture as $item) {
-            $date = $item['DateTime']->nodeValue;
-            $server = $item['Server']->nodeValue;
-            echo "Дата $date, Сервер $server"."<br>";
-        }
+        return $bot->getPunishmentsLog("Pavel_Snow");
+
+    }
+
+    private function getConvers($id) {
+        $conv = new conversation();
+        return $conv->getConvers($id);
+    }
+
+    public function index($id) {
+        $convinfo = $this->getConvers($id);
+        $warns = $convinfo->convlog->warns;
+        return view('components.get.admin.admininfo', compact('convinfo', 'warns'));
     }
 }

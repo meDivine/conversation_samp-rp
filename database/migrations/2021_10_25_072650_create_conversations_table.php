@@ -21,7 +21,8 @@ class CreateConversationsTable extends Migration
             $table->text('about');
             $table->string('real_name');
             $table->text('leaderships');
-            $table->integer('who_start');
+            $table->unsignedBigInteger('who_start');
+            $table->foreign('who_start')->references('id')->on('users');
             $table->integer('agree');
             $table->integer('disagree');
             $table->integer('neutral');

@@ -76,7 +76,7 @@
                                         <label for="bi bi-file-earmark-break">Лидерства</label>
                                         <div class="position-relative">
                                         <textarea wire:model="leaderships" type="text" class="form-control"
-                                                  placeholder="Mobile" id="bi bi-file-earmark-break"> </textarea>
+                                                  placeholder="Байкеры - 2 раза" id="bi bi-file-earmark-break"> </textarea>
                                             <div class="form-control-icon">
                                                 <i class="bi bi-lightning"></i>
                                             </div>
@@ -90,6 +90,7 @@
                                     <button type="submit"
                                             class="btn btn-primary me-1 mb-1">Добавить
                                     </button>
+
                                 </div>
                             </div>
                         </div>

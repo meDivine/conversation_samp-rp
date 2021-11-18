@@ -16,7 +16,7 @@
             </a>
             <ul class="submenu ">
                 <li class="submenu-item ">
-                    <a href="auth-login.html">Администратора</a>
+                    <a href="{{ route('addadmin') }}">Администратора</a>
                 </li>
                 <li class="submenu-item ">
                     <a href="auth-register.html">Игрового помошника</a>

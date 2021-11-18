@@ -15,7 +15,10 @@ class CreateConvStatsTable extends Migration
     {
         Schema::create('conv_stats', function (Blueprint $table) {
             $table->id();
-            $table->integer('conv_id');
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+            $table->unsignedBigInteger('conv_id');
+            $table->foreign('conv_id')->references('id')->on('conversations');
             $table->string('nick');
             $table->json('warns');
             $table->json('kicks');

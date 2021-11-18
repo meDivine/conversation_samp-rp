@@ -22,9 +22,22 @@ class conversation extends Model
         'neutral',
         'who_close'
     ];
+
+    /*
+     * Мутатор по измению числовых типов на буквенные
+     */
+    public function getTypeAttribute()
+    {
+        $type = [
+            0    =>    'Администратор',
+            1    =>    'Помощник',
+            2    =>    'Остальные',
+        ];
+        return $type[ $this->attributes['type'] ];
+    }
     /*
      * Создаем голосование
-     * Добавим его в Job чтобы после создания голосования приложение профлудило во вконтакте в фоне.
+     * Вызывать будем через Job
      */
     public function createConversation(int $type, string $social, string $nickname,
                                        string $about, string $realName, string $leaderships,
@@ -32,9 +45,9 @@ class conversation extends Model
         return self::create([
             /*
              * тип голосования
-             * 1 - администратор
-             * 2 - саппорт
-             * 3 - прочее
+             * 0 - администратор
+             * 1 - саппорт
+             * 2 - прочее
              */
             'type' => $type,
             /*
@@ -70,4 +83,28 @@ class conversation extends Model
             'who_close' => NULL
         ]);
     }
+
+    /*
+     * Подтянем еще и название профиля для вывода имени, а не ида юзера
+     */
+    public function profile()
+    {
+        return $this->hasOne(User::class, 'id', 'who_start');
+    }
+
+    /*
+     * Получим логи выдвигаемого из другой таблицы
+     */
+    public function convlog() {
+        return $this->hasOne(conv_stats::class, 'conv_id');
+    }
+
+    /*
+     * Получение данных в роуте,если данных нет, то 404 ошибка
+     */
+    public function getConvers($id) {
+        return self::findOrFail($id);
+    }
+
+
 }

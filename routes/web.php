@@ -23,6 +23,7 @@ Route::get('/addadmin', function () {
 })->name('addadmin');
 
 Route::get('/test', [ConversationController::class, 'parse']);
+Route::get('/c/{id}', [ConversationController::class, 'index'])->name('adminconv');
 
 Route::get('/t', [VkontakteAuth::class, 'test']);
 

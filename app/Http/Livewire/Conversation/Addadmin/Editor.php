@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Conversation\Addadmin;
 
+use App\Jobs\Logs\getpunish;
+use App\Models\conv_stats;
 use App\Models\conversation;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -67,8 +69,14 @@ class Editor extends Component
         $this->validate();
         $uid = Auth::id();
         $conversation = new conversation();
-        return $conversation->createConversation(0, $this->social, $this->gamenick, $this->about, $this->realname, $this->leaderships, $uid);
+        $conversationStats = new conv_stats();
+        $convers = $conversation->createConversation(0, $this->social, $this->gamenick, $this->about, $this->realname, $this->leaderships, $uid);
+        $conversationStats->createConvLog($convers['id'], $convers['nickname']);
+        return getpunish::dispatch($convers['id'], $this->gamenick);
     }
+
+
+
     public function render()
     {
         return view('livewire.conversation.addadmin.editor');
