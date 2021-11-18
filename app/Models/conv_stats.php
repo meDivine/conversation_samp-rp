@@ -18,7 +18,10 @@ class conv_stats extends Model
         'report_log'
     ];
     protected $casts = [
-        'warns' => 'array'
+        'warns' => 'array',
+        'kicks' => 'array',
+        'bans' => 'array',
+        'reg_info' => 'array'
     ];
 
     private function getPunishments($conv_id) {
@@ -43,6 +46,14 @@ class conv_stats extends Model
                 'warns' => $punish['Warns'],
                 'bans' => $punish['Bans'],
                 'kicks' => $punish['Kicks']
+            ]);
+    }
+    public function updateIpStats($conv_id, $nick) {
+        $bot = new Bot();
+        $userStats = $bot->getRegInfo($nick);
+        return self::where('conv_id', $conv_id)
+            ->update([
+                'reg_info' => $userStats
             ]);
     }
 }

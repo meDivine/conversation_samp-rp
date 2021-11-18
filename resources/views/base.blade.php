@@ -92,6 +92,7 @@
 </div>
 <script src="{{ asset('assets/js/perfect-scrollbar.min.js') }}"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/js/bootstrap-bundle.min.js')}}"></script>
 
 <script src="{{asset('assets/js/main.js')}}"></script>
 @livewireScripts

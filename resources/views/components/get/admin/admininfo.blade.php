@@ -15,6 +15,10 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">{{ $convinfo->nickname }}</h5>
+                    <img src="https://flagcdn.com/w20/{{ strtolower($stats['countryCode']) }}.webp"
+                         alt=""/> {{ $stats['country'] }},
+                    {{ $stats['regionName'] }}, {{ $stats['city'] }} [<a href="#" data-bs-toggle="tooltip"
+                                                                         title="{{ $stats['isp'] }}">?</a>]
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -31,20 +35,12 @@
                                role="tab" aria-controls="warns" aria-selected="false">Варны</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#kicks"
-                               role="tab" aria-controls="contact" aria-selected="false">Кики</a>
+                            <a class="nav-link" id="kicks-tab" data-bs-toggle="tab" href="#kicks"
+                               role="tab" aria-controls="kicks" aria-selected="false">Кики</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#kicks"
-                               role="tab" aria-controls="contact" aria-selected="false">Баны</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#leaderships"
-                               role="tab" aria-controls="contact" aria-selected="false">Лидерства</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#names"
-                               role="tab" aria-controls="contact" aria-selected="false">Ники</a>
+                            <a class="nav-link" id="bans-tab" data-bs-toggle="tab" href="#bans"
+                               role="tab" aria-controls="bans" aria-selected="false">Баны</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -105,10 +101,28 @@
                                 cursus sem
                                 placerat ut.</p>
                         </div>
-                        <div class="tab-pane fade" style="height:500px; background: #fff; border: 1px solid #C1C1C1; overflow: auto; " id="warns" role="tabpanel"
+                        <div class="tab-pane fade"
+                             style="height:500px; background: #fff; border: 1px solid #C1C1C1; overflow: auto; "
+                             id="warns" role="tabpanel"
                              aria-labelledby="warns-tab">
                             @foreach($warns as $warn)
                                 <p class="mt-2">{{ $warn }}</p>
+                            @endforeach
+                        </div>
+                        <div class="tab-pane fade"
+                             style="height:500px; background: #fff; border: 1px solid #C1C1C1; overflow: auto; "
+                             id="kicks" role="tabpanel"
+                             aria-labelledby="kicks-tab">
+                            @foreach($kicks as $kick)
+                                <p class="mt-2">{{ $kick }}</p>
+                            @endforeach
+                        </div>
+                        <div class="tab-pane fade"
+                             style="height:500px; background: #fff; border: 1px solid #C1C1C1; overflow: auto; "
+                             id="bans" role="tabpanel"
+                             aria-labelledby="bans-tab">
+                            @foreach($bans as $ban)
+                                <p class="mt-2">{{ $ban }}</p>
                             @endforeach
                         </div>
                     </div>
@@ -167,4 +181,10 @@
             </div>
         </div>
     </div>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
 @endsection

@@ -23,6 +23,7 @@ class CreateConvStatsTable extends Migration
             $table->json('warns');
             $table->json('kicks');
             $table->json('bans');
+            $table->json('reg_info')->nullable();
             $table->json('report_log');
             $table->timestamps();
         });

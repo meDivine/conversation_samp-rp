@@ -6,6 +6,7 @@ use DOMDocument;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Psr\Http\Message\ResponseInterface;
 
 class Bot extends Model
 {
@@ -106,7 +107,7 @@ class Bot extends Model
             ]
         ]);
 
-        $discounts = $client->request('POST', '/work/kickban.php', [
+        $getrow = $client->request('POST', '/work/kickban.php', [
             'headers' => [
                 'Cookie' => $this->login()
             ],
@@ -117,12 +118,7 @@ class Bot extends Model
                 'time_diapzon_2' => '17.11.2021',
             ]
         ]);
-        $tableObject = $discounts->getBody()->getContents();
-        $dom = new domDocument("1.0", "UTF-8");
-        $dom->loadHTML( "\xEF\xBB\xBF" . $tableObject, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
-        $dom->preserveWhiteSpace = false;
-        $tables = $dom->getElementsByTagName('table');
-        $rows = $tables->item(0)->getElementsByTagName('tr'); //
+        $rows = $this->getRows($getrow); //
         $punishments = []; // пустой массив куда будем забивать данные
         foreach ($rows as $row) { // собираю массив
             $cols = $row->getElementsByTagName('td');
@@ -153,26 +149,37 @@ class Bot extends Model
             switch ($type) {
                 case "UnBan":
                     array_push($bans,"Дата: $date | Тип: Разбан | Админ: $admin | Причина: $reason");
+                    break;
                 case "Ban":
                     array_push($bans, "Дата: $date | Тип: Бан | Админ: $admin | Причина: $reason");
+                    break;
                 case "OffBan":
                     array_push($bans, "Дата: $date | Тип: ОффБан | Админ: $admin | Причина: $reason");
+                    break;
                 case "IBan":
                     array_push($bans, "Дата: $date | Тип: Бан 2038 | Админ: $admin | Причина: $reason");
+                    break;
                 case "IOffBan":
                     array_push($bans, "Дата: $date | Тип: ОффБан 2038 | Админ: $admin | Причина: $reason");
+                    break;
                 case "Kick":
                     array_push($kicks, "Дата: $date | Тип: Кик | Админ: $admin | Причина: $reason");
+                    break;
                 case "SKick":
                     array_push($kicks, "Дата: $date | Тип: Тихий кик | Админ: $admin | Причина: $reason");
+                    break;
                 case "Warn":
                     array_push($warns, "Дата: $date | Тип: Варн | Админ: $admin | Причина: $reason");
+                    break;
                 case "BWarn":
                     array_push($warns, "Дата: $date | Тип: БВарн | Админ: $admin | Причина: $reason");
+                    break;
                 case "UnWarn":
                     array_push($warns, "Дата: $date | Тип: Снятие варна | Админ: $admin | Причина: $reason");
+                    break;
                 case "DelWarn":
                     array_push($warns, "Дата: $date | Тип: Удаление варна | Админ: $admin | Причина: $reason");
+                    break;
             }
         }
         return [
@@ -180,5 +187,59 @@ class Bot extends Model
             'Bans'=> json_encode($bans, JSON_UNESCAPED_UNICODE),
             'Kicks' => json_encode($kicks, JSON_UNESCAPED_UNICODE)
         ];
+    }
+
+    public function getRegInfo($nick) {
+        $server_logs = new server_logs();
+        $client = new Client([
+            'base_uri' => 'https://logs.samp-rp.su/"',
+            'verify' => false,
+            'allow_redirects' => false,
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0 (Linux 3.4; rv:64.0) Gecko/20100101 Firefox/15.0',
+                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Content-Type' => 'application/x-www-form-urlencoded'
+            ]
+        ]);
+
+        $getrow = $client->request('POST', '/work/register.php', [
+            'headers' => [
+                'Cookie' => $this->login()
+            ],
+            'form_params' => [
+                'Player' => $nick,
+                'Promocode' => '',
+                'time_diapzon_1' => '01.01.2015',
+                'time_diapzon_2' => '17.11.2021',
+            ]
+        ]);
+        //
+       $rows = $this->getRows($getrow);
+       /*
+        *
+        */
+        $userlog = [];
+       foreach ($rows as $row) {
+           $cols = $row->getElementsByTagName('td');
+           array_push($userlog, $cols[4]);
+       }
+       unset($userlog[0]);
+
+       $userip = trim($userlog[1]->nodeValue, "[]");
+       return $server_logs->getipInfo($userip);
+    }
+
+    /**
+     * @param ResponseInterface $getrow
+     * @return mixed
+     */
+    public function getRows(ResponseInterface $getrow)
+    {
+        $tableObject = $getrow->getBody()->getContents();
+        $dom = new domDocument("1.0", "UTF-8");
+        $dom->loadHTML("\xEF\xBB\xBF" . $tableObject, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->preserveWhiteSpace = false;
+        $tables = $dom->getElementsByTagName('table');
+        return $tables->item(0)->getElementsByTagName('tr');
     }
 }
