@@ -15,10 +15,10 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">{{ $convinfo->nickname }}</h5>
-                    <img src="https://flagcdn.com/w20/{{ strtolower($stats['countryCode']) }}.webp"
-                         alt=""/> {{ $stats['country'] }},
-                    {{ $stats['regionName'] }}, {{ $stats['city'] }} [<a href="#" data-bs-toggle="tooltip"
-                                                                         title="{{ $stats['isp'] }}">?</a>]
+                    <img src="https://flagcdn.com/w20/{{ strtolower($stats['countryCode'] ?? null) }}.webp"
+                         alt=""/> {{ $stats['country'] ?? null }},
+                    {{ $stats['regionName'] ?? null}}, {{ $stats['city'] ?? null}} [<a href="#" data-bs-toggle="tooltip"
+                                                                         title="{{ $stats['isp'] ?? null}}">?</a>]
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -29,6 +29,10 @@
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#reportlog"
                                role="tab" aria-controls="profile" aria-selected="false">Репорт лог</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="suplog-tab" data-bs-toggle="tab" href="#suplog"
+                               role="tab" aria-controls="suplog" aria-selected="false">Саппорт лог</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="warns-tab" data-bs-toggle="tab" href="#warns"
@@ -67,8 +71,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel"
-                             aria-labelledby="profile-tab">
+                        <div class="tab-pane fade" id="reportlog" role="tabpanel"
+                             aria-labelledby="reportlog-tab">
                             Integer interdum diam eleifend metus lacinia, quis gravida eros mollis.
                             Fusce non sapien
                             sit amet magna dapibus
@@ -89,17 +93,13 @@
                             massa pretium ullamcorper vitae eu
                             tortor.
                         </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel"
-                             aria-labelledby="contact-tab">
+                        <div class="tab-pane fade" id="suplog" role="tabpanel"
+                             aria-labelledby="suplog-tab">
                             <p class="mt-2">Duis ultrices purus non eros fermentum hendrerit. Aenean
-                                ornare interdum
-                                viverra. Sed ut odio velit. Aenean eu diam
-                                dictum nibh rhoncus mattis quis ac risus. Vivamus eu congue ipsum.
-                                Maecenas id
-                                sollicitudin ex. Cras in ex vestibulum,
-                                posuere orci at, sollicitudin purus. Morbi mollis elementum enim, in
-                                cursus sem
-                                placerat ut.</p>
+                            @foreach ($suplogs as $suplog)
+                                <p class="mt-2">{{ $suplog }}</p>
+                                @endforeach
+                            </p>
                         </div>
                         <div class="tab-pane fade"
                              style="height:500px; background: #fff; border: 1px solid #C1C1C1; overflow: auto; "
@@ -173,10 +173,11 @@
                     <a href="http://" class="black"><i data-feather="smile"></i></a>
                     <div class="d-flex flex-grow-1 ml-4">
                         <label>
-                            <input type="text" class="form-control" placeholder="Сообщение">
+                            <textarea type="text" class="form-control" placeholder="Сообщение"> </textarea>
                         </label>
-                        <a class="btn btn-primary">Отправить</a>
+
                     </div>
+                    <a class="btn btn-primary">Отправить</a>
                 </div>
             </div>
         </div>

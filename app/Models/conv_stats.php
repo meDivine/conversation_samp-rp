@@ -15,13 +15,15 @@ class conv_stats extends Model
         'warns',
         'bans',
         'kicks',
-        'report_log'
+        'report_log',
+        'support_log'
     ];
     protected $casts = [
         'warns' => 'array',
         'kicks' => 'array',
         'bans' => 'array',
-        'reg_info' => 'array'
+        'reg_info' => 'array',
+        'support_log' => 'array'
     ];
 
     private function getPunishments($conv_id) {
@@ -34,7 +36,8 @@ class conv_stats extends Model
             'warns' => json_encode('Пусто', JSON_UNESCAPED_UNICODE),
             'bans' => json_encode('Пусто', JSON_UNESCAPED_UNICODE),
             'kicks' => json_encode('Пусто',JSON_UNESCAPED_UNICODE),
-            'report_log' => json_encode('Пусто', JSON_UNESCAPED_UNICODE)
+            'report_log' => json_encode('Пусто', JSON_UNESCAPED_UNICODE),
+            'support_log' => json_encode('Пусто', JSON_UNESCAPED_UNICODE),
         ]);
     }
 
@@ -54,6 +57,15 @@ class conv_stats extends Model
         return self::where('conv_id', $conv_id)
             ->update([
                 'reg_info' => $userStats
+            ]);
+    }
+
+    public function updateSupportLogStats($conv_id, $nick) {
+        $bot = new Bot();
+        $userStats = $bot->getSupportReportLog($nick);
+        return self::where('conv_id', $conv_id)
+            ->update([
+                'support_log' => $userStats
             ]);
     }
 }

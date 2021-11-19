@@ -225,10 +225,47 @@ class Bot extends Model
        }
        unset($userlog[0]);
 
-       $userip = trim($userlog[1]->nodeValue, "[]");
-       return $server_logs->getipInfo($userip);
+       $userip = trim($userlog[1]->nodeValue ?? null, "[]");
+       return $userip != null? $server_logs->getipInfo($userip) : json_encode(['value' => 'пусто'], JSON_UNESCAPED_UNICODE);
     }
 
+    public function getSupportReportLog($nick) {
+        $client = new Client([
+            'base_uri' => 'https://logs.samp-rp.su/"',
+            'verify' => false,
+            'allow_redirects' => false,
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0 (Linux 3.4; rv:64.0) Gecko/20100101 Firefox/15.0',
+                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Content-Type' => 'application/x-www-form-urlencoded'
+            ]
+        ]);
+
+        $getrow = $client->request('POST', '/work/support.php', [
+            'headers' => [
+                'Cookie' => $this->login()
+            ],
+            'form_params' => [
+                'Sender' => $nick,
+                'Recipient' => '',
+                'time_diapzon_1' => '01.01.2011',
+                'time_diapzon_2' => '17.11.2021',
+            ]
+        ]);
+        $rows = $this->getRows($getrow); //
+        $report = []; // пустой массив куда будем забивать данные
+        foreach ($rows as $row) {
+            $cols = $row->getElementsByTagName('td');
+            $DateTime = $cols[1]->nodeValue ?? null;
+            $Server = $cols[2]->nodeValue ?? null;
+            $Sender = $cols[3]->nodeValue ?? null;
+            $Recipient = $cols[4]->nodeValue ?? null;
+            $Text = $cols[5]->nodeValue ?? null;
+            array_push($report, "Дата $DateTime | Отправитель: $Sender | Получатель $Recipient | Текст: $Text");
+        }
+        unset($report[0]);
+        var_dump($report);
+    }
     /**
      * @param ResponseInterface $getrow
      * @return mixed

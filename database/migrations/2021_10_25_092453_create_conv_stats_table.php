@@ -25,6 +25,7 @@ class CreateConvStatsTable extends Migration
             $table->json('bans');
             $table->json('reg_info')->nullable();
             $table->json('report_log');
+            $table->json('support_log');
             $table->timestamps();
         });
     }

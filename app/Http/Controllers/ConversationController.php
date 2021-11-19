@@ -31,6 +31,7 @@ class ConversationController extends Controller
         $kicks = $convinfo->convlog->kicks;
         $bans = $convinfo->convlog->bans;
         $stats = $convinfo->convlog->reg_info;
-        return view('components.get.admin.admininfo', compact('convinfo', 'warns', 'kicks', 'bans', 'stats'));
+        $suplogs = $convinfo->convlog->support_log;
+        return view('components.get.admin.admininfo', compact('convinfo', 'warns', 'kicks', 'bans', 'stats', 'suplogs'));
     }
 }
