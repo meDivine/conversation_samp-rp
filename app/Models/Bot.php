@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use DOMDocument;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +13,20 @@ class Bot extends Model
 {
     use HasFactory;
 
+
+    private function Client(): Client
+    {
+        return new Client([
+            'base_uri' => 'https://logs.samp-rp.su/"',
+            'verify' => false,
+            'allow_redirects' => false,
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0 (Linux 3.4; rv:64.0) Gecko/20100101 Firefox/15.0',
+                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Content-Type' => 'application/x-www-form-urlencoded'
+            ]
+        ]);
+    }
 
     /*
      * Авторизуемся и получим куки
@@ -230,17 +245,7 @@ class Bot extends Model
     }
 
     public function getSupportReportLog($nick) {
-        $client = new Client([
-            'base_uri' => 'https://logs.samp-rp.su/"',
-            'verify' => false,
-            'allow_redirects' => false,
-            'headers' => [
-                'User-Agent' => 'Mozilla/5.0 (Linux 3.4; rv:64.0) Gecko/20100101 Firefox/15.0',
-                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Content-Type' => 'application/x-www-form-urlencoded'
-            ]
-        ]);
-
+        $client = $this->Client();
         $getrow = $client->request('POST', '/work/support.php', [
             'headers' => [
                 'Cookie' => $this->login()
@@ -264,7 +269,39 @@ class Bot extends Model
             array_push($report, "Дата $DateTime | Отправитель: $Sender | Получатель $Recipient | Текст: $Text");
         }
         unset($report[0]);
-        var_dump($report);
+        return $report;
+    }
+
+
+    public function getCaptureLogToday(): array
+    {
+        $client = $this->Client();
+        $dt = Carbon::now()->format('d.m.Y');
+        $getrow = $client->request('POST', '/work/capture.php', [
+            'headers' => [
+                'Cookie' => $this->login()
+            ],
+            'form_params' => [
+                'time_diapzon_1' => $dt,
+                'time_diapzon_2' => $dt,
+            ]
+        ]);
+        $rows = $this->getRows($getrow); //
+        $capture = []; // пустой массив куда будем забивать данные
+        foreach ($rows as $row) {
+            $cols = $row->getElementsByTagName('td');
+            $template = [
+                'servertime' => trim($cols[1]->nodeValue ?? null,"[]"),
+                'server' => (int)trim($cols[2]->nodeValue ?? null,"[]"),
+                'fraction' => (int)trim($cols[3]->nodeValue ?? null,"[]"),
+                'player' => trim($cols[4]->nodeValue ?? null,"[]"),
+                'property' => (int)trim($cols[5]->nodeValue ?? null,"[]"),
+                'owner' => (int)trim($cols[6]->nodeValue ?? null,"[]"),
+            ];
+            array_push($capture, $template);
+        }
+        unset($capture[0]);
+        return $capture;
     }
     /**
      * @param ResponseInterface $getrow

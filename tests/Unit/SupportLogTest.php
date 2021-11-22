@@ -3,7 +3,10 @@
 namespace Tests\Unit;
 
 use App\Models\Bot;
+use App\Models\CaptureLog;
 use App\Models\User;
+use App\Notifications\Vkontakte;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class SupportLogTest extends TestCase
@@ -25,7 +28,8 @@ class SupportLogTest extends TestCase
     }
 
     public function testGetSupportLogs() {
-        $bot = new Bot();
-        $bot->getSupportReportLog("Richard_Watterson");
+        $bot = new CaptureLog();
+        $bot->CaptureObserve();
     }
+
 }

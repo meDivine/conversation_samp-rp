@@ -15,7 +15,7 @@ class CreateCaptureLogsTable extends Migration
     {
         Schema::create('capture_logs', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('servertime');
+            $table->string('servertime');
             $table->tinyInteger('fraction');
             $table->integer('server');
             $table->string('player', 24);

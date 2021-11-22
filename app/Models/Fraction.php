@@ -12,4 +12,9 @@ class Fraction extends Model
         'frac_name'
     ];
     public $timestamps = false;
+
+    public function renameFracName($id): string {
+        $frac = self::find($id);
+        return $frac->frac_name;
+    }
 }
