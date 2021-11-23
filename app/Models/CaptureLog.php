@@ -8,6 +8,33 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
+/**
+ * App\Models\CaptureLog
+ *
+ * @property int $id
+ * @property string $servertime
+ * @property int $fraction
+ * @property int $server
+ * @property string $player
+ * @property int $property
+ * @property int $owner
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Fraction|null $fracIdToName
+ * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereFraction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereOwner($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog wherePlayer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereProperty($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereServer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereServertime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class CaptureLog extends Model
 {
     use HasFactory;

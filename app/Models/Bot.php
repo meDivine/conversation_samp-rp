@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * App\Models\Bot
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Bot newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Bot newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Bot query()
+ * @mixin \Eloquent
+ */
 class Bot extends Model
 {
     use HasFactory;
