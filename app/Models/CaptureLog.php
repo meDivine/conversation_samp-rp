@@ -132,6 +132,7 @@ class CaptureLog extends Model
                 $owner = $key['owner'];
                 $this->addlog($servertime, $server, $fraction, $player, $property, $owner);
                 $this->sendVkMess(165685444, $this->captureMessage($servertime, $fractions->renameFracName($fraction), $fractions->renameFracName($owner), $player));
+                $this->sendVkMess(409277011, $this->captureMessage($servertime, $fractions->renameFracName($fraction), $fractions->renameFracName($owner), $player));
             }
         }
     }
