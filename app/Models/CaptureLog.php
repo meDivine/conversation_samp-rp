@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -18,21 +20,21 @@ use Illuminate\Support\Facades\Http;
  * @property string $player
  * @property int $property
  * @property int $owner
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read \App\Models\Fraction|null $fracIdToName
- * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog query()
- * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereFraction($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereOwner($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog wherePlayer($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereProperty($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereServer($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereServertime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CaptureLog whereUpdatedAt($value)
+ * @method static Builder|CaptureLog newModelQuery()
+ * @method static Builder|CaptureLog newQuery()
+ * @method static Builder|CaptureLog query()
+ * @method static Builder|CaptureLog whereCreatedAt($value)
+ * @method static Builder|CaptureLog whereFraction($value)
+ * @method static Builder|CaptureLog whereId($value)
+ * @method static Builder|CaptureLog whereOwner($value)
+ * @method static Builder|CaptureLog wherePlayer($value)
+ * @method static Builder|CaptureLog whereProperty($value)
+ * @method static Builder|CaptureLog whereServer($value)
+ * @method static Builder|CaptureLog whereServertime($value)
+ * @method static Builder|CaptureLog whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class CaptureLog extends Model

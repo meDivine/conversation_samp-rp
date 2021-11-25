@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use DOMDocument;
 use GuzzleHttp\Client;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Psr\Http\Message\ResponseInterface;
@@ -12,9 +13,9 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * App\Models\Bot
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Bot newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Bot newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Bot query()
+ * @method static Builder|Bot newModelQuery()
+ * @method static Builder|Bot newQuery()
+ * @method static Builder|Bot query()
  * @mixin \Eloquent
  */
 class Bot extends Model
@@ -117,7 +118,7 @@ class Bot extends Model
         return $capture;
     }
 
-    public function getPunishmentsLog($nick)
+    public function getPunishmentsLog($nick): array
     {
         $client = new Client([
             'base_uri' => 'https://logs.samp-rp.su/"',
@@ -281,11 +282,14 @@ class Bot extends Model
     }
 
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getCaptureLogToday(): array
     {
         $client = $this->Client();
         $dt = Carbon::now()->format('d.m.Y');
-        $getrow = $client->request('POST', '/work/capture.php', [
+        $getter = $client->request('POST', '/work/capture.php', [
             'headers' => [
                 'Cookie' => $this->login()
             ],
@@ -294,7 +298,7 @@ class Bot extends Model
                 'time_diapzon_2' => $dt,
             ]
         ]);
-        $rows = $this->getRows($getrow); //
+        $rows = $this->getRows($getter); //
         $capture = []; // пустой массив куда будем забивать данные
         foreach ($rows as $row) {
             $cols = $row->getElementsByTagName('td');
