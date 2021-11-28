@@ -7,6 +7,7 @@ use App\Jobs\Logs\Getregdate;
 use App\Jobs\Logs\SupportLog;
 use App\Models\conv_stats;
 use App\Models\conversation;
+use Illuminate\Foundation\Bus\PendingDispatch;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -67,7 +68,8 @@ class Editor extends Component
     /*
      * Пока синхронно
      */
-    public function addConversation() {
+    public function addConversation(): PendingDispatch
+    {
         $this->validate();
         $uid = Auth::id();
         $conversation = new conversation();
