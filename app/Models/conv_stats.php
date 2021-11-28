@@ -60,6 +60,9 @@ class conv_stats extends Model
             ]);
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function updateSupportLogStats($conv_id, $nick) {
         $bot = new Bot();
         $userStats = $bot->getSupportReportLog($nick);

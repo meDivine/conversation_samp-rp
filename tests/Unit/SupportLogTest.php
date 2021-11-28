@@ -27,9 +27,9 @@ class SupportLogTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testGetSupportLogs() {
-        $bot = new CaptureLog();
-        $bot->CaptureObserve();
+    public function testSupLog(){
+        $bot = new Bot();
+        dd($bot->getSupportReportLog("Richard_Watterson"));
     }
 
 }

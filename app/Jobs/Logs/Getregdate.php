@@ -34,6 +34,6 @@ class Getregdate implements ShouldQueue
     public function handle()
     {
         $convLog = new conv_stats();
-        $convLog->updateIpStats($this->conv_id, $this->nick);
+       // $convLog->updateIpStats($this->conv_id, $this->nick);
     }
 }

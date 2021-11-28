@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use DOMDocument;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -41,7 +42,7 @@ class Bot extends Model
      * Авторизуемся и получим куки
      */
     /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     private function login(): string
     {
@@ -67,7 +68,7 @@ class Bot extends Model
     }
 
     /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     /*
      *Получим табличку и распарсим ее
@@ -243,38 +244,46 @@ class Bot extends Model
         *
         */
         $userlog = [];
-       foreach ($rows as $row) {
-           $cols = $row->getElementsByTagName('td');
-           array_push($userlog, $cols[4]);
-       }
-       unset($userlog[0]);
+        foreach ($rows as $row) {
+            $cols = $row->getElementsByTagName('td');
+            array_push($userlog, $cols[4]);
+        }
+        unset($userlog[0]);
 
-       $userip = trim($userlog[1]->nodeValue ?? null, "[]");
-       return $userip != null? $server_logs->getipInfo($userip) : json_encode(['value' => 'пусто'], JSON_UNESCAPED_UNICODE);
+        $userip = trim($userlog[1]->nodeValue ?? null, "[]");
+        return $userip != null ? $server_logs->getipInfo($userip) : json_encode(['value' => 'пусто'], JSON_UNESCAPED_UNICODE);
     }
-
-    public function getSupportReportLog($nick) {
+    /*
+     * Инфо о логе вопросов суппортам
+     */
+    /**
+     * @throws GuzzleException
+     */
+    public function getSupportReportLog($nick): array
+    {
         $client = $this->Client();
-        $getrow = $client->request('POST', '/work/support.php', [
-            'headers' => [
-                'Cookie' => $this->login()
-            ],
-            'form_params' => [
-                'Sender' => $nick,
-                'Recipient' => '',
-                'time_diapzon_1' => '01.01.2011',
-                'time_diapzon_2' => '17.11.2021',
-            ]
-        ]);
+        try {
+            $getrow = $client->request('POST', '/work/support.php', [
+                'headers' => [
+                    'Cookie' => $this->login()
+                ],
+                'form_params' => [
+                    'Sender' => $nick,
+                    'Recipient' => '',
+                    'time_diapzon_1' => '01.01.2011',
+                    'time_diapzon_2' => '17.11.2021',
+                ]
+            ]);
+        } catch (GuzzleException $e) {
+        }
         $rows = $this->getRows($getrow); //
         $report = []; // пустой массив куда будем забивать данные
         foreach ($rows as $row) {
             $cols = $row->getElementsByTagName('td');
-            $DateTime = $cols[1]->nodeValue ?? null;
-            $Server = $cols[2]->nodeValue ?? null;
-            $Sender = $cols[3]->nodeValue ?? null;
-            $Recipient = $cols[4]->nodeValue ?? null;
-            $Text = $cols[5]->nodeValue ?? null;
+            $DateTime = trim($cols[1]->nodeValue ?? null, "[]");
+            $Sender = trim($cols[3]->nodeValue ?? null, "[]");
+            $Recipient = trim($cols[4]->nodeValue ?? null, "[]");
+            $Text = trim($cols[5]->nodeValue ?? null, "[]");
             array_push($report, "Дата $DateTime | Отправитель: $Sender | Получатель $Recipient | Текст: $Text");
         }
         unset($report[0]);
@@ -283,7 +292,7 @@ class Bot extends Model
 
 
     /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function getCaptureLogToday(): array
     {

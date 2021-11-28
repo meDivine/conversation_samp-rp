@@ -94,12 +94,11 @@
                             tortor.
                         </div>
                         <div class="tab-pane fade" id="suplog" role="tabpanel"
+                             style="height:500px; background: #fff; border: 1px solid #C1C1C1; overflow: auto; "
                              aria-labelledby="suplog-tab">
-                            <p class="mt-2">Duis ultrices purus non eros fermentum hendrerit. Aenean
                             @foreach ($suplogs as $suplog)
                                 <p class="mt-2">{{ $suplog }}</p>
                                 @endforeach
-                            </p>
                         </div>
                         <div class="tab-pane fade"
                              style="height:500px; background: #fff; border: 1px solid #C1C1C1; overflow: auto; "
