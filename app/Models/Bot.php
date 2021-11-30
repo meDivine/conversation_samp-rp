@@ -165,7 +165,6 @@ class Bot extends Model
         $warns = [];
         $bans = [];
         $kicks = [];
-
         foreach ($punishments as $punishment) {
             $date = trim($punishment['DateTime']->nodeValue, "[]");
             $type = trim($punishment['Type']->nodeValue, "[]");
@@ -234,7 +233,7 @@ class Bot extends Model
             'form_params' => [
                 'Player' => $nick,
                 'Promocode' => '',
-                'time_diapzon_1' => '01.01.2015',
+                'time_diapzon_1' => '01.01.2011',
                 'time_diapzon_2' => '17.11.2021',
             ]
         ]);
@@ -259,7 +258,7 @@ class Bot extends Model
     /**
      * @throws GuzzleException
      */
-    public function getSupportReportLog($nick): array
+    public function getSupportReportLog($nick): bool|string
     {
         $client = $this->Client();
         try {
@@ -276,18 +275,29 @@ class Bot extends Model
             ]);
         } catch (GuzzleException $e) {
         }
-        $rows = $this->getRows($getrow); //
-        $report = []; // пустой массив куда будем забивать данные
-        foreach ($rows as $row) {
-            $cols = $row->getElementsByTagName('td');
-            $DateTime = trim($cols[1]->nodeValue ?? null, "[]");
-            $Sender = trim($cols[3]->nodeValue ?? null, "[]");
-            $Recipient = trim($cols[4]->nodeValue ?? null, "[]");
-            $Text = trim($cols[5]->nodeValue ?? null, "[]");
-            array_push($report, "Дата $DateTime | Отправитель: $Sender | Получатель $Recipient | Текст: $Text");
+        return $this->getReport($getrow);
+    }
+    /**
+     * @throws GuzzleException
+     */
+    public function getAdminReportLog($nick)
+    {
+        $client = $this->Client();
+        try {
+            $getrow = $client->request('POST', '/work/report.php', [
+                'headers' => [
+                    'Cookie' => $this->login()
+                ],
+                'form_params' => [
+                    'Sender' => $nick,
+                    'Recipient' => '',
+                    'time_diapzon_1' => '01.01.2011',
+                    'time_diapzon_2' => '17.11.2021',
+                ]
+            ]);
+        } catch (GuzzleException $e) {
         }
-        unset($report[0]);
-        return $report;
+        return $this->getReport($getrow);
     }
 
 
@@ -332,9 +342,29 @@ class Bot extends Model
     {
         $tableObject = $getrow->getBody()->getContents();
         $dom = new domDocument("1.0", "UTF-8");
-        $dom->loadHTML("\xEF\xBB\xBF" . $tableObject, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        @$dom->loadHTML("\xEF\xBB\xBF" . $tableObject, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $dom->preserveWhiteSpace = false;
         $tables = $dom->getElementsByTagName('table');
         return $tables->item(0)->getElementsByTagName('tr');
+    }
+
+    /**
+     * @param ResponseInterface $getrow
+     * @return string|false
+     */
+    public function getReport(ResponseInterface $getrow): bool|string
+    {
+        $rows = $this->getRows($getrow); //
+        $report = []; // пустой массив куда будем забивать данные
+        foreach ($rows as $row) {
+            $cols = $row->getElementsByTagName('td');
+            $DateTime = trim($cols[1]->nodeValue ?? null, "[]");
+            $Sender = trim($cols[3]->nodeValue ?? null, "[]");
+            $Recipient = trim($cols[4]->nodeValue ?? null, "[]");
+            $Text = trim($cols[5]->nodeValue ?? null, "[]");
+            array_push($report, "Дата $DateTime | Отправитель: $Sender | Получатель $Recipient | Текст: $Text");
+        }
+        unset($report[0]);
+        return json_encode($report, JSON_UNESCAPED_UNICODE);
     }
 }

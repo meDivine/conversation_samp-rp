@@ -17,7 +17,7 @@ class ConversationController extends Controller
     public function parse()
     {
         $bot = new Bot();
-        $reg = $bot->getRegInfo("Pavel_Snow");
+        return $bot->getRegInfo("Pavel_Snow");
     }
 
     private function getConvers($id) {
@@ -31,7 +31,8 @@ class ConversationController extends Controller
         $kicks = $convinfo->convlog->kicks;
         $bans = $convinfo->convlog->bans;
         $stats = $convinfo->convlog->reg_info;
-        $suplogs = $convinfo->convlog->support_log;
-        return view('components.get.admin.admininfo', compact('convinfo', 'warns', 'kicks', 'bans', 'stats', 'suplogs'));
+        $suplogs = $convinfo->convlog->support_log ?? null;
+        $replogs = $convinfo->convlog->report_log ?? null;
+        return view('components.get.admin.admininfo', compact('convinfo', 'warns', 'kicks', 'bans', 'stats', 'suplogs', 'replogs'));
     }
 }

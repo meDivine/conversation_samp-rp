@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Conversation\Addadmin;
 
 use App\Jobs\Logs\getpunish;
 use App\Jobs\Logs\Getregdate;
+use App\Jobs\Logs\ReportLog;
 use App\Jobs\Logs\SupportLog;
 use App\Models\conv_stats;
 use App\Models\conversation;
@@ -76,8 +77,10 @@ class Editor extends Component
         $conversationStats = new conv_stats();
         $convers = $conversation->createConversation(0, $this->social, $this->gamenick, $this->about, $this->realname, $this->leaderships, $uid);
         $conversationStats->createConvLog($convers['id'], $convers['nickname']);
+        ReportLog::dispatch($convers['id'], $this->gamenick);
         Getregdate::dispatch($convers['id'], $this->gamenick);
         SupportLog::dispatch($convers['id'], $this->gamenick);
+
         return getpunish::dispatch($convers['id'], $this->gamenick);
     }
 

@@ -72,26 +72,11 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="reportlog" role="tabpanel"
+                             style="height:500px; background: #fff; border: 1px solid #C1C1C1; overflow: auto; "
                              aria-labelledby="reportlog-tab">
-                            Integer interdum diam eleifend metus lacinia, quis gravida eros mollis.
-                            Fusce non sapien
-                            sit amet magna dapibus
-                            ultrices. Morbi tincidunt magna ex, eget faucibus sapien bibendum non. Duis
-                            a mauris ex.
-                            Ut finibus risus sed massa
-                            mattis porta. Aliquam sagittis massa et purus efficitur ultricies. Integer
-                            pretium dolor
-                            at sapien laoreet ultricies.
-                            Fusce congue et lorem id convallis. Nulla volutpat tellus nec molestie
-                            finibus. In nec
-                            odio tincidunt eros finibus
-                            ullamcorper. Ut sodales, dui nec posuere finibus, nisl sem aliquam metus, eu
-                            accumsan
-                            lacus felis at odio. Sed lacus
-                            quam, convallis quis condimentum ut, accumsan congue massa. Pellentesque et
-                            quam vel
-                            massa pretium ullamcorper vitae eu
-                            tortor.
+                            @foreach($replogs as $replog)
+                                <p class="mt-2">{{ $replog }}</p>
+                                @endforeach
                         </div>
                         <div class="tab-pane fade" id="suplog" role="tabpanel"
                              style="height:500px; background: #fff; border: 1px solid #C1C1C1; overflow: auto; "
@@ -128,58 +113,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <div class="media d-flex align-items-center">
-                        <div class="avatar me-3">
-                            <img src="{{ Auth::user()->avatar }}" alt="" srcset="">
-                            <span class="avatar-status bg-success"></span>
-                        </div>
-                        <div class="name flex-grow-1">
-                            <h6 class="mb-0">Обсуждение</h6>
-                            <span class="text-xs">Твой ник наверное</span>
-                        </div>
-                        <button class="btn btn-sm">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body pt-4 bg-grey">
-                    <div class="chat-content">
-                        <div class="chat chat-left">
-                            <div class="chat-body">
-                                <div class="chat-message">
-                                    <div class="avatar me-3">
-                                        <img src="{{ Auth::user()->avatar }}" alt="" srcset="">
-                                    </div>
-                                    Я против выдвижения Павла Сноу на пост Главного администратора, потому что он блатит
-                                    таких людей как: Emily_Lewis
-                                </div>
-                            </div>
-                            <div class="chat-message">
-                                <div class="avatar me-3">
-                                    <img src="{{ Auth::user()->avatar }}" alt="" srcset="">
-                                </div>
-                                Я за выдвижения Павла Сноу на пост Главного администратора
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="message-form d-flex flex-direction-column align-items-center">
-                    <a href="http://" class="black"><i data-feather="smile"></i></a>
-                    <div class="d-flex flex-grow-1 ml-4">
-                        <label>
-                            <textarea type="text" class="form-control" placeholder="Сообщение"> </textarea>
-                        </label>
+        <livewire:conversation.chat :conv_id="$convinfo->id" />
 
-                    </div>
-                    <a class="btn btn-primary">Отправить</a>
-                </div>
-            </div>
-        </div>
     </div>
     <script>
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

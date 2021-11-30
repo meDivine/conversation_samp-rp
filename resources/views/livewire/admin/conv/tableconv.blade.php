@@ -33,8 +33,8 @@
                                         </div>
                                         <a class="font-bold ms-3 mb-0">{{ $key->profile->name }}
                                             ({{ $key->profile->nickname }})</a></td>
-                                    <td class="text-bold-500">{{ $key->agree }} / {{ $key->disagree }}
-                                        / {{ $key->neutral }}</td>
+                                    <td class="text-bold-500"><span style="color: #47a76a">{{ $key->agree }}</span> / <span style="color: #CB4154">{{ $key->disagree }}</span>
+                                        / <span style="color: #B5B8B1;">{{ $key->neutral }}</span></td>
                                     <td><a href="{{ route('adminconv', ['id' => $key->id]) }}" class="btn btn-primary">Перейти</a></td>
                                 </tr>
                             @endforeach

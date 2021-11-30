@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Mockery\Exception\InvalidOrderException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -36,6 +37,9 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+        $this->renderable(function (InvalidOrderException $e, $request) {
+            return response()->view('errors.invalid-order', [], 500);
         });
     }
 }

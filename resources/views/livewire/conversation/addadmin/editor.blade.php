@@ -90,7 +90,6 @@
                                     <button type="submit"
                                             class="btn btn-primary me-1 mb-1">Добавить
                                     </button>
-
                                 </div>
                             </div>
                         </div>

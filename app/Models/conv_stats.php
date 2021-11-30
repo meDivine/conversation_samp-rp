@@ -16,14 +16,16 @@ class conv_stats extends Model
         'bans',
         'kicks',
         'report_log',
-        'support_log'
+        'support_log',
+        'reg_info'
     ];
     protected $casts = [
         'warns' => 'array',
         'kicks' => 'array',
         'bans' => 'array',
         'reg_info' => 'array',
-        'support_log' => 'array'
+        'support_log' => 'array',
+        'report_log' => 'array'
     ];
 
     private function getPunishments($conv_id) {
@@ -69,6 +71,14 @@ class conv_stats extends Model
         return self::where('conv_id', $conv_id)
             ->update([
                 'support_log' => $userStats
+            ]);
+    }
+    public function updateAdminLogStats($conv_id, $nick) {
+        $bot = new Bot();
+        $userStats = $bot->getAdminReportLog($nick);
+        return self::where('conv_id', $conv_id)
+            ->update([
+                'report_log' => $userStats
             ]);
     }
 }

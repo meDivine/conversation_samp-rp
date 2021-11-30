@@ -41,7 +41,8 @@ class conversation extends Model
      */
     public function createConversation(int $type, string $social, string $nickname,
                                        string $about, string $realName, string $leaderships,
-                                       int $whoStart) {
+                                       int $whoStart): Model|conversation
+    {
         return self::create([
             /*
              * тип голосования
