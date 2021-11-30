@@ -61,11 +61,25 @@
                                             <label for="disabledInput">Лидерства</label>
                                             <p class="form-control-static" id="staticInput">{{ $convinfo->leaderships }}</p>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="disabledInput">Ссылка на соц. сеть</label>
+                                            <p class="form-control-static" href="{{ $convinfo->social }}" id="staticInput">{{ $convinfo->social }}</p>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="disabledInput">О кандидате</label>
                                             <p class="form-control-static" id="staticInput">{{ $convinfo->about }}</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="disabledInput">Реальное имя</label>
+                                            <p class="form-control-static" id="staticInput">{{ $convinfo->real_name }}</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="disabledInput">Голос</label>
+                                            <p><i style="color: #499C54; font-size: 1.5rem;" class="bi bi-emoji-smile"></i>
+                                            <i style="color: #FF0000; font-size: 1.5rem;" class="bi bi-emoji-angry"></i>
+                                            <i style="color: #AEB4B6; font-size: 1.5rem;" class="bi bi-emoji-expressionless"></i></p>
                                         </div>
                                     </div>
                                 </div>

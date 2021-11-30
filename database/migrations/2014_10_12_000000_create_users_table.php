@@ -21,12 +21,7 @@ class CreateUsersTable extends Migration
             $table->integer('vk_id');
             $table->text('avatar');
             $table->string('nickname',32);
-            $table->boolean('punishmentsLog')->default(false);
-            $table->boolean('captureLog')->default(false);
-            $table->boolean('ipAuthLog')->default(false);
-            $table->boolean('GangBangLog')->default(false);
-            $table->boolean('nickNameLog')->default(false);
-            $table->boolean('inviteGiverankLog')->default(false);
+            $table->boolean('captureInfo')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
