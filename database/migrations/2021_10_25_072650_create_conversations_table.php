@@ -23,9 +23,6 @@ class CreateConversationsTable extends Migration
             $table->text('leaderships');
             $table->unsignedBigInteger('who_start');
             $table->foreign('who_start')->references('id')->on('users');
-            $table->integer('agree');
-            $table->integer('disagree');
-            $table->integer('neutral');
             $table->integer('who_close')->nullable();
             $table->timestamps();
         });

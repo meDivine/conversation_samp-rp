@@ -9,14 +9,14 @@ class Chat extends Component
 {
     public $mess;
     public $conv_id;
-    public $readyToLoad = false;
-    
-    protected $rules =[
+    public bool $readyToLoad = false;
+
+    protected array $rules =[
         'mess'      => 'string|max:1024',
         'conv_id'   => 'integer|max:1024',
     ];
 
-    protected $messages = [
+    protected array $messages = [
         'mess.string'       =>  'Сообщение не является строкой',
         'mess.max'          =>  'Сообщение длиннее 1024 символов',
         'conv_id.integer'   =>  'Ид голосования не является цифрой'

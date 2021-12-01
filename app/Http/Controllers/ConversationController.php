@@ -16,8 +16,10 @@ class ConversationController extends Controller
      */
     public function parse()
     {
-        $bot = new Bot();
-        return $bot->getRegInfo("Pavel_Snow");
+        /*$bot = new Bot();
+        return $bot->getRegInfo("Pavel_Snow");*/
+        $conv = new conversation();
+        return $conv->countVoteStats1(1);
     }
 
     private function getConvers($id) {
@@ -31,7 +33,7 @@ class ConversationController extends Controller
         $kicks = $convinfo->convlog->kicks;
         $bans = $convinfo->convlog->bans;
         $stats = $convinfo->convlog->reg_info;
-        $suplogs = $convinfo->convlog->support_log ?? null;
+        $suplogs = $convinfo->convlog->support_log ?? null; // по сути это надо делать в шаблоне
         $replogs = $convinfo->convlog->report_log ?? null;
         return view('components.get.admin.admininfo', compact('convinfo', 'warns', 'kicks', 'bans', 'stats', 'suplogs', 'replogs'));
     }

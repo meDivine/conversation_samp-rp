@@ -18,9 +18,9 @@ Route::get('/', function () {
     return view('components.homepage.home');
 })->name('home');
 
-Route::get('/addadmin', function () {
+Route::get('/add', function () {
     return view('addadmin');
-})->name('addadmin');
+})->name('add');
 
 Route::get('/test', [ConversationController::class, 'parse']);
 Route::get('/c/{id}', [ConversationController::class, 'index'])->name('adminconv');

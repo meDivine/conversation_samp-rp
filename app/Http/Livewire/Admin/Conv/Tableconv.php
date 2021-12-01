@@ -14,8 +14,8 @@ class Tableconv extends Component
 
     public function render()
     {
-        $all = conversation::simplePaginate(10);
-        $all->withPath('/paginate');
+        $all = conversation::whereNull('who_close')
+            ->simplePaginate(10);
         return view('livewire.admin.conv.tableconv', compact('all'));
     }
 }

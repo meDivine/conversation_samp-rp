@@ -17,8 +17,10 @@ class CreateConvVotingsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('conv_id');
-            $table->string('comment');
-            $table->tinyInteger('vote');
+            $table->string('comment')->nullable();
+            $table->boolean('agree')->default(false);
+            $table->boolean('disagree')->default(false);
+            $table->boolean('neutral')->default(false);
             $table->timestamps();
         });
     }

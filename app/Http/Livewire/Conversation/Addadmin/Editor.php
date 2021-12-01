@@ -19,6 +19,7 @@ class Editor extends Component
     public $realname;
     public $about;
     public $leaderships;
+    public $type = 1;
 
     protected $rules = [
         'gamenick'      => 'required|min:3|max:24|string',

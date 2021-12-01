@@ -27,6 +27,20 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group has-icon-left">
+                                        <labe>Тип выдвижения</labe>
+                                        <fieldset class="form-group">
+                                            <select wire:model="type" class="form-select" id="basicSelect">
+                                                <option value="1">Администратор</option>
+                                                <option value="2">Игровой помощник</option>
+                                            </select>
+                                        </fieldset>
+                                        @error('gamenick')
+                                        {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group has-icon-left">
                                         <label for="email-id-icon">Ссылка на Соц. Сеть</label>
                                         <div class="position-relative">
                                             <input wire:model="social" type="text" class="form-control"

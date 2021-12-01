@@ -19,6 +19,11 @@
             <div class="chat-content">
                 <div class="chat chat-left">
                     <div class="chat-body" wire:init="renderChatMessages">
+                        <div wire:loading="renderChatMessages">
+                            <div style="text-align: center;">
+                                <img src="{{asset('assets/img/ObviousSoupyArthropods-size_restricted.gif')}}" height="320px" width="320px">
+                            </div>
+                        </div>
                         @foreach($chatMess as $key)
                             <div class="chat-message">
                                 <div class="avatar me-3">

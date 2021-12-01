@@ -18,7 +18,7 @@
                     <img src="https://flagcdn.com/w20/{{ strtolower($stats['countryCode'] ?? null) }}.webp"
                          alt=""/> {{ $stats['country'] ?? null }},
                     {{ $stats['regionName'] ?? null}}, {{ $stats['city'] ?? null}} [<a href="#" data-bs-toggle="tooltip"
-                                                                         title="{{ $stats['isp'] ?? null}}">?</a>]
+                                                                                       title="{{ $stats['isp'] ?? null}}">?</a>]
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -55,15 +55,18 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="disabledInput">Игровой ник</label>
-                                            <p class="form-control-static" id="staticInput">{{ $convinfo->nickname }}</p>
+                                            <p class="form-control-static"
+                                               id="staticInput">{{ $convinfo->nickname }}</p>
                                         </div>
                                         <div class="form-group">
                                             <label for="disabledInput">Лидерства</label>
-                                            <p class="form-control-static" id="staticInput">{{ $convinfo->leaderships }}</p>
+                                            <p class="form-control-static"
+                                               id="staticInput">{{ $convinfo->leaderships }}</p>
                                         </div>
                                         <div class="form-group">
                                             <label for="disabledInput">Ссылка на соц. сеть</label>
-                                            <p class="form-control-static" href="{{ $convinfo->social }}" id="staticInput">{{ $convinfo->social }}</p>
+                                            <p class="form-control-static" href="{{ $convinfo->social }}"
+                                               id="staticInput">{{ $convinfo->social }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -73,14 +76,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="disabledInput">Реальное имя</label>
-                                            <p class="form-control-static" id="staticInput">{{ $convinfo->real_name }}</p>
+                                            <p class="form-control-static"
+                                               id="staticInput">{{ $convinfo->real_name }}</p>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="disabledInput">Голос</label>
-                                            <p><i style="color: #499C54; font-size: 1.5rem;" class="bi bi-emoji-smile"></i>
-                                            <i style="color: #FF0000; font-size: 1.5rem;" class="bi bi-emoji-angry"></i>
-                                            <i style="color: #AEB4B6; font-size: 1.5rem;" class="bi bi-emoji-expressionless"></i></p>
-                                        </div>
+                                        <livewire:admin.conv.vote-form :conv_id="$convinfo->id" />
                                     </div>
                                 </div>
                             </div>
@@ -89,15 +88,15 @@
                              style="height:500px; background: #fff; border: 1px solid #C1C1C1; overflow: auto; "
                              aria-labelledby="reportlog-tab">
                             @foreach($replogs as $replog)
-                                <p class="mt-2">{{ $replog }}</p>
-                                @endforeach
+                                <p class="mt-2">{{ $replog ?? null }}</p>
+                            @endforeach
                         </div>
                         <div class="tab-pane fade" id="suplog" role="tabpanel"
                              style="height:500px; background: #fff; border: 1px solid #C1C1C1; overflow: auto; "
                              aria-labelledby="suplog-tab">
                             @foreach ($suplogs as $suplog)
-                                <p class="mt-2">{{ $suplog }}</p>
-                                @endforeach
+                                <p class="mt-2">{{ $suplog ?? null }}</p>
+                            @endforeach
                         </div>
                         <div class="tab-pane fade"
                              style="height:500px; background: #fff; border: 1px solid #C1C1C1; overflow: auto; "
@@ -127,8 +126,7 @@
                 </div>
             </div>
         </div>
-        <livewire:conversation.chat :conv_id="$convinfo->id" />
-
+        <livewire:conversation.chat :conv_id="$convinfo->id"/>
     </div>
     <script>
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

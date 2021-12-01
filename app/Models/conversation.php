@@ -72,15 +72,12 @@ class conversation extends Model
              */
             'leaderships' => $leaderships,
             /*
-             * ID того, кто начал (не VKID )
+             * ID того, кто начал
              */
             'who_start' => $whoStart,
             /*
              * Статистика голосования по дефолту нули
              */
-            'agree' => 0,
-            'disagree' => 0,
-            'neutral' => 0,
             'who_close' => NULL
         ]);
     }
@@ -104,8 +101,28 @@ class conversation extends Model
      * Получение данных в роуте,если данных нет, то 404 ошибка
      */
     public function getConvers($id) {
-        return self::findOrFail($id);
+        return self::where('id' , $id)
+            ->whereNull('who_close')
+            ->firstOrFail();
+    }
+    /*
+     * Статистика по голосам в голосовании
+     */
+    public function convVote() {
+        return $this->hasMany(conv_voting::class, 'conv_id');
     }
 
+    public function countVoteStats($count_id) {
+        return self::find($count_id);
+    }
 
+    public function countVoteStats1($count_id) {
+        $model = self::find($count_id);
+
+        return [
+            'agree' => $model->convVote->sum('agree'),
+            'disagree' => $model->convVote->sum('disagree'),
+            'neutral' => $model->convVote->sum('neutral'),
+        ];
+    }
 }
