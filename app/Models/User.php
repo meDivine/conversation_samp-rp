@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Orchid\Platform\Models\User as Authenticatable;
 
 class User extends Authenticatable
@@ -18,7 +19,8 @@ class User extends Authenticatable
         'permissions',
         'vk_id',
         'avatar',
-        'nickname'
+        'nickname',
+        'capture_info'
     ];
 
     /**
@@ -67,4 +69,26 @@ class User extends Authenticatable
         'created_at',
     ];
 
+    public function createOrRegister($email, $name, $avatar, $id) {
+        return self::firstOrCreate(
+            [
+                'vk_id' => $id
+            ],
+            [
+                'vk_id' => $id,
+                'email' => $email,
+                'name' => $name,
+                'avatar' => $avatar,
+                'nickname' => null
+            ]);
+    }
+
+    public function updateUser($id, $avatar, $name, $email) {
+        return self::where('vk_id', $id)
+            ->update([
+                'avatar' => $avatar,
+                'name' => $name,
+                'email' => $email
+            ]);
+    }
 }

@@ -15,6 +15,7 @@ class Tableconv extends Component
     public function render()
     {
         $all = conversation::whereNull('who_close')
+            ->latest()
             ->simplePaginate(10);
         return view('livewire.admin.conv.tableconv', compact('all'));
     }

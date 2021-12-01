@@ -33,7 +33,9 @@ return [
     'vkontakte' => [
         'client_id' => env('VKONTAKTE_CLIENT_ID'),
         'client_secret' => env('VKONTAKTE_CLIENT_SECRET'),
-        'redirect' => env('VKONTAKTE_REDIRECT_URI')
+        'redirect' => env('VKONTAKTE_REDIRECT_URI'),
+        'group' => env('VKONTAKTE_GROUP_KEY'),
+        'lang' => 'ru',
     ],
 
     'logsbot' => [
@@ -41,6 +43,4 @@ return [
         'bot_password' => env('BOT_PASSWORD'),
         'bot_secret' => env('BOT_SECRET')
     ],
-
-
 ];

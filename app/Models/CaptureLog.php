@@ -62,7 +62,6 @@ class CaptureLog extends Model
         foreach ($array1 as $key => $item) {
             if (in_array($item, $array3)) unset($array1[$key]); // если по ключу, то $item['key]
         }
-
         return $array1;
     }
 
@@ -144,8 +143,8 @@ class CaptureLog extends Model
     private function sendVkMess($user_id, $mess): Response
     {
         $uid = $user_id;
+        $token = config('services.vkontakte.group');
         $message = rawurlencode($mess);
-        return Http::post("https://api.vk.com/method/messages.send?user_id=$uid&v=5.81&access_token=883d11ee80ecba881bd87b72b04a868aca67fa17a71f8b620212cf458718aba81a6205e5c02786c0fdfeb&message=$message");
-
+        return Http::post("https://api.vk.com/method/messages.send?user_id=$uid&v=5.81&access_token=$token&message=$message");
     }
 }

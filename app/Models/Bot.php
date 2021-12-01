@@ -258,7 +258,7 @@ class Bot extends Model
     /**
      * @throws GuzzleException
      */
-    public function getSupportReportLog($nick): bool|string
+    public function getSupportReportLog($nick)
     {
         $client = $this->Client();
         try {
@@ -352,7 +352,7 @@ class Bot extends Model
      * @param ResponseInterface $getrow
      * @return string|false
      */
-    public function getReport(ResponseInterface $getrow): bool|string
+    public function getReport(ResponseInterface $getrow)
     {
         $rows = $this->getRows($getrow); //
         $report = []; // пустой массив куда будем забивать данные

@@ -103,7 +103,7 @@
                              id="warns" role="tabpanel"
                              aria-labelledby="warns-tab">
                             @foreach($warns as $warn)
-                                <p class="mt-2">{{ $warn }}</p>
+                                <p class="mt-2">{{ $warn ?? [] }}</p>
                             @endforeach
                         </div>
                         <div class="tab-pane fade"
@@ -111,7 +111,7 @@
                              id="kicks" role="tabpanel"
                              aria-labelledby="kicks-tab">
                             @foreach($kicks as $kick)
-                                <p class="mt-2">{{ $kick }}</p>
+                                <p class="mt-2">{{ $kick ?? [] }}</p>
                             @endforeach
                         </div>
                         <div class="tab-pane fade"
@@ -119,7 +119,7 @@
                              id="bans" role="tabpanel"
                              aria-labelledby="bans-tab">
                             @foreach($bans as $ban)
-                                <p class="mt-2">{{ $ban }}</p>
+                                <p class="mt-2">{{ $ban ?? [] }}</p>
                             @endforeach
                         </div>
                     </div>

@@ -1,5 +1,7 @@
 <?php
 
+use SocialiteProviders\Manager\ServiceProvider;
+
 return [
 
     /*
@@ -161,6 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         /*

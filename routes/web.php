@@ -22,6 +22,9 @@ Route::get('/add', function () {
     return view('addadmin');
 })->name('add');
 
+Route::get('/oauth/vk', [VkontakteAuth::class, 'redirect']);
+Route::get('/oauth/vk/callback', [VkontakteAuth::class, 'callback']);
+
 Route::get('/test', [ConversationController::class, 'parse']);
 Route::get('/c/{id}', [ConversationController::class, 'index'])->name('adminconv');
 

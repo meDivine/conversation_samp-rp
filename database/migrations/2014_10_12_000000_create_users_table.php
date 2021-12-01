@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->integer('vk_id');
             $table->text('avatar');
-            $table->string('nickname',32);
-            $table->boolean('captureInfo')->default(false);
+            $table->string('nickname',32)->nullable();
+            $table->boolean('capture_info')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
