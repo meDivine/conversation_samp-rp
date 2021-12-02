@@ -21,6 +21,13 @@
             </a>
         </li>
 
+        <li class="sidebar-item">
+            <a href="{{ route('logs') }}" class='sidebar-link'>
+                <i class="bi bi-archive-fill"></i>
+                <span>Логи</span>
+            </a>
+        </li>
+
         <li class="sidebar-item has-sub">
             <a href="#" class='sidebar-link'>
                 <i class="bi bi-folder-fill"></i>
@@ -31,73 +38,73 @@
                     <a href="{{ route('add') }}">Авторизации</a>
                 </li>
                 <li class="submenu-item ">
-                    <a href="auth-register.html">Наказания</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Имена</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Войны</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Фракция</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Деньги</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Дома</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Промокоды</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Кости</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Покер</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Дурак</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Блек Джек</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Торговая площадка</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Склад фракции</a>
+                    <a href="auth-forgot-password.html">IP авторизации</a>
                 </li>
                 <li class="submenu-item ">
                     <a href="auth-forgot-password.html">Бан IP</a>
                 </li>
                 <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">IP авторизации</a>
+                    <a href="auth-forgot-password.html">Блек Джек</a>
                 </li>
                 <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Саппорты</a>
+                    <a href="auth-forgot-password.html">Войны</a>
                 </li>
                 <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Репорт</a>
+                    <a href="auth-forgot-password.html">Дома</a>
                 </li>
                 <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Миссии</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Емейлы</a>
-                </li>
-                <li class="submenu-item ">
-                    <a href="auth-forgot-password.html">Сообщества</a>
+                    <a href="auth-forgot-password.html">Деньги</a>
                 </li>
                 <li class="submenu-item ">
                     <a href="auth-forgot-password.html">Донат</a>
                 </li>
                 <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Дурак</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Имена</a>
+                </li>
+                <li class="submenu-item ">
                     <a href="auth-forgot-password.html">Инвентарь</a>
                 </li>
                 <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Емейлы</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Кости</a>
+                </li>
+                <li class="submenu-item ">
                     <a href="auth-forgot-password.html">Кики античита</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Миссии</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-register.html">Наказания</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Покер</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Промокоды</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Репорт</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Склад фракции</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Саппорты</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Сообщества</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Торговая площадка</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Фракция</a>
                 </li>
             </ul>
         </li>
@@ -122,6 +129,11 @@
                 </li>
             </ul>
         </li>
-
+        <li class="sidebar-item  ">
+            <a href="{{ route('settings') }}" class='sidebar-link'>
+                <i class="bi bi-gear-fill"></i>
+                <span>Настройки</span>
+            </a>
+        </li>
     </ul>
 </div>

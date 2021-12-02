@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->text('avatar');
             $table->string('nickname',32)->nullable();
             $table->boolean('capture_info')->default(false);
+            $table->boolean('notify_conversation')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

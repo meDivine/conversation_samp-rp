@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\LogsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VkontakteAuth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,17 +18,19 @@ use App\Http\Controllers\VkontakteAuth;
 
 Route::get('/', function () {
     return view('components.homepage.home');
-})->name('home');
+})->name('home')->middleware(['auth']);
 
 Route::get('/add', function () {
     return view('addadmin');
-})->name('add');
+})->name('add')->middleware(['auth']);
 
+Route::get('/settings', function () {
+    return view('components.settings.settings');
+})->name('settings')->middleware(['auth']);
 Route::get('/oauth/vk', [VkontakteAuth::class, 'redirect']);
 Route::get('/oauth/vk/callback', [VkontakteAuth::class, 'callback']);
-
 Route::get('/test', [ConversationController::class, 'parse']);
-Route::get('/c/{id}', [ConversationController::class, 'index'])->name('adminconv');
-
+Route::get('/c/{id}', [ConversationController::class, 'index'])->name('adminconv')->middleware(['auth']);
 Route::get('/t', [VkontakteAuth::class, 'test']);
+Route::get('/logs', [LogsController::class, 'index'])->name('logs')->middleware(['auth']);
 

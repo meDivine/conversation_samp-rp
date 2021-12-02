@@ -20,7 +20,8 @@ class User extends Authenticatable
         'vk_id',
         'avatar',
         'nickname',
-        'capture_info'
+        'capture_info',
+        'notify_conversation',
     ];
 
     /**
@@ -90,5 +91,9 @@ class User extends Authenticatable
                 'name' => $name,
                 'email' => $email
             ]);
+    }
+
+    public function getEnabledNotifyVK() {
+       // return self
     }
 }
