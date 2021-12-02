@@ -13,7 +13,7 @@
                                     <div class="form-group has-icon-left">
                                         <label for="first-name-icon">Игровое имя</label>
                                         <div class="position-relative">
-                                            <input wire:model="gamenick" type="text" class="form-control"
+                                            <input wire:model.lazy="gamenick" type="text" class="form-control"
                                                    placeholder="Pavel_Snow (прим.)"
                                                    id="first-name-icon">
                                             <div class="form-control-icon">
@@ -29,7 +29,7 @@
                                     <div class="form-group has-icon-left">
                                         <labe>Тип выдвижения</labe>
                                         <fieldset class="form-group">
-                                            <select wire:model="type" class="form-select" id="basicSelect">
+                                            <select wire:model.lazy="type" class="form-select" id="basicSelect">
                                                 <option value="1">Администратор</option>
                                                 <option value="2">Игровой помощник</option>
                                             </select>
@@ -43,7 +43,7 @@
                                     <div class="form-group has-icon-left">
                                         <label for="email-id-icon">Ссылка на Соц. Сеть</label>
                                         <div class="position-relative">
-                                            <input wire:model="social" type="text" class="form-control"
+                                            <input wire:model.lazy="social" type="text" class="form-control"
                                                    placeholder="https://vk.com/zxcdeadinside" id="email-id-icon">
                                             <div class="form-control-icon">
                                                 <i class="bi bi-envelope"></i>
@@ -58,7 +58,7 @@
                                     <div class="form-group has-icon-left">
                                         <label for="first-name-icon">Реальное имя</label>
                                         <div class="position-relative">
-                                            <input wire:model="realname" type="text" class="form-control"
+                                            <input wire:model.lazy="realname" type="text" class="form-control"
                                                    placeholder="Павлик"
                                                    id="first-name-icon">
                                             <div class="form-control-icon">
@@ -74,7 +74,7 @@
                                     <div class="form-group has-icon-left">
                                         <label for="bi bi-file-earmark-break">О кандидате</label>
                                         <div class="position-relative">
-                                        <textarea wire:model="about" type="text" class="form-control"
+                                        <textarea wire:model.lazy="about" type="text" class="form-control"
                                                   placeholder="Красивый смелый сильный" id="bi bi-file-earmark-break"> </textarea>
                                             <div class="form-control-icon">
                                                 <i class="bi bi-file-earmark-break"></i>
@@ -89,7 +89,7 @@
                                     <div class="form-group has-icon-left">
                                         <label for="bi bi-file-earmark-break">Лидерства</label>
                                         <div class="position-relative">
-                                        <textarea wire:model="leaderships" type="text" class="form-control"
+                                        <textarea wire:model.lazy="leaderships" type="text" class="form-control"
                                                   placeholder="Байкеры - 2 раза" id="bi bi-file-earmark-break"> </textarea>
                                             <div class="form-control-icon">
                                                 <i class="bi bi-lightning"></i>

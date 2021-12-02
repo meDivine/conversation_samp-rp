@@ -17,11 +17,11 @@
         </div>
         <div class="card-body pt-4 bg-grey" style="overflow: auto;height: 400px; ">
             <div class="chat-content">
-                <div class="chat chat-left">
-                    <div class="chat-body" wire:init="renderChatMessages">
-                        <div wire:loading="renderChatMessages">
+                <div class="chat chat-left" wire:init="renderChatMessages">
+                    <div class="chat-body" wire:poll.keep-alive="renderChatMessages">
+                        <div wire:loading="renderChatMessages" wire:target="renderChatMessages">
                             <div style="text-align: center;">
-                                <img src="{{asset('assets/img/ObviousSoupyArthropods-size_restricted.gif')}}" height="320px" width="320px">
+                                <img src="{{asset('assets/img/ObviousSoupyArthropods-size_restricted.gif')}}" height="320px" width="320px" alt="">
                             </div>
                         </div>
                         @foreach($chatMess as $key)
@@ -45,7 +45,7 @@
             <div class="message-form d-flex flex-direction-column align-items-center">
                 <a href="http://" class="black"><i data-feather="smile"></i></a>
                 <div class="d-flex flex-grow-1 ml-4">
-                    <input type="text" wire:model="mess" class="form-control" placeholder="Максимум 1024 символа">
+                    <input type="text" wire:model.lazy="mess" class="form-control" placeholder="Максимум 1024 символа">
                 </div>
                 @error('mess')
                     {{ $message }}
