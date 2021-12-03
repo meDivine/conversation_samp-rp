@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bot;
 use App\Models\conversation;
+use App\Models\User;
 use GuzzleHttp\Client;
 
 class ConversationController extends Controller
@@ -18,8 +19,8 @@ class ConversationController extends Controller
     {
         /*$bot = new Bot();
         return $bot->getRegInfo("Pavel_Snow");*/
-        $conv = new conversation();
-        return $conv->countVoteStats1(1);
+        $conv = new User();
+        return $conv->getEnabledNotifyVK();
     }
 
     private function getConvers($id) {

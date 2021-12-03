@@ -105,43 +105,51 @@ class CaptureLog extends Model
     /*
      * Билдим сообщение-шаблон о начале войны за территорию
      */
-    private function captureMessage($servertime, $fraction, $owner, $player):string {
+    private function captureMessage($servertime, $fraction, $owner, $player): string
+    {
         return "\xF0\x9F\x91\x8AНачало войны\xF0\x9F\x91\x8A\n\xF0\x9F\x94\xAA Атакует: $fraction\n\xF0\x9F\x90\xB7 Защищается: $owner\n\xF0\x9F\x92\xAA Инициатор: $player\n\xF0\x9F\x95\x90 Начало: $servertime (МСК)";
     }
+
     /*
      * Если пустой массив - нет новых логов о каптурах  - fale
      * Иначе true
      */
-    private function captureObserveStatus(): bool {
+    private function captureObserveStatus(): bool
+    {
         return !empty($this->getLogs());
+    }
+    /*
+     * Получим иды вк которые включили уведомления
+     * о начале войны за территорию
+     */
+    private function getVKNotyifyCapture()
+    {
+        $user = new User();
+        return $user->getEnabledNotifyVK();
     }
 
     /*
      * Сам наблюдатель
      */
-    public function CaptureObserve() {
-        $observeStatus = $this->captureObserveStatus();
+    public function CaptureObserve(){
+        $observeStatus = $this->captureObserveStatus(); // если есть новые логи
         if ($observeStatus) {
-            $newCaptures = $this->getLogs();
+            $newCaptures = $this->getLogs(); // Взять новые логи
             $fractions = new Fraction();
-            foreach ( $newCaptures as $key) {
-                $servertime = $key['servertime'];
-                $server = $key['server'];
-                $fraction = $key['fraction'];
-                $player = $key['player'];
-                $property = $key['property'];
-                $owner = $key['owner'];
-                $this->addlog($servertime, $server, $fraction, $player, $property, $owner);
-                $this->sendVkMess(165685444, $this->captureMessage($servertime, $fractions->renameFracName($fraction), $fractions->renameFracName($owner), $player));
-                $this->sendVkMess(409277011, $this->captureMessage($servertime, $fractions->renameFracName($fraction), $fractions->renameFracName($owner), $player));
+            $vkIds = $this->getVKNotyifyCapture(); // прочитаем иды вк у кого включена отправка
+            foreach ($newCaptures as $key) {
+                $this->addlog($key['servertime'], $key['server'], $key['fraction'], $key['player'], $key['property'], $key['owner']); // запишем лог в бд чтобы в след раз не отправлять его
+                foreach ($vkIds as $vk) {
+                    //отправка по идам вк сообщения о каптурах
+                    $this->sendVkMess($vk->vk_id, $this->captureMessage($key['servertime'], $fractions->renameFracName($key['fraction']), $fractions->renameFracName($key['owner']), $key['player']));
+                }
             }
         }
     }
     /*
      * Отправим сообщение вк от группы
      */
-    private function sendVkMess($user_id, $mess): Response
-    {
+    public function sendVkMess($user_id, $mess): Response {
         $uid = $user_id;
         $token = config('services.vkontakte.group');
         $message = rawurlencode($mess);

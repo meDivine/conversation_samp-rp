@@ -8,10 +8,11 @@
                 <form class="form form-horizontal">
                     <div class="form-body">
                         <div class="row">
+                            @livewire('logs.select')
                             <div class="col-md-4">
                                 <label>Игровой ник</label>
                             </div>
-                            <div class="col-md-8 form-group">
+                            <div class="col-md-8 form-group" wire:>
                                 <input type="text" id="first-name" class="form-control"
                                        name="fname" placeholder="Nick_Name">
                             </div>

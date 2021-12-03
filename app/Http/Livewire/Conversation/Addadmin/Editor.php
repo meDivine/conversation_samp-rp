@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Conversation\Addadmin;
 
+use App\Jobs\ConversationSend;
 use App\Jobs\Logs\getpunish;
 use App\Jobs\Logs\Getregdate;
 use App\Jobs\Logs\ReportLog;
@@ -77,12 +78,13 @@ class Editor extends Component
         $conversation = new conversation();
         $conversationStats = new conv_stats();
         $convers = $conversation->createConversation(0, $this->social, $this->gamenick, $this->about, $this->realname, $this->leaderships, $uid);
+        $conversId = $convers['id'];
         $conversationStats->createConvLog($convers['id'], $convers['nickname']);
-        ReportLog::dispatch($convers['id'], $this->gamenick);
-        Getregdate::dispatch($convers['id'], $this->gamenick);
-        SupportLog::dispatch($convers['id'], $this->gamenick);
-
-        return getpunish::dispatch($convers['id'], $this->gamenick);
+        ReportLog::dispatch($conversId, $this->gamenick);
+        Getregdate::dispatch($conversId, $this->gamenick);
+        SupportLog::dispatch($conversId, $this->gamenick);
+        ConversationSend::dispatch($conversId, $this->gamenick);
+        return getpunish::dispatch($conversId, $this->gamenick);
     }
 
 

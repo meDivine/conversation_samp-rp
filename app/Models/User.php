@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Platform\Models\User as Authenticatable;
 
@@ -93,7 +94,13 @@ class User extends Authenticatable
             ]);
     }
 
-    public function getEnabledNotifyVK() {
-       // return self
+    public function getEnabledNotifyVK(): Collection {
+        return self::select('vk_id')
+            ->where('capture_info', true)->get();
+    }
+
+    public function getEnabledNotifyConversation(): Collection {
+        return self::select('vk_id')
+            ->where('notify_conversation', true)->get();
     }
 }

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class conversation extends Model
 {
@@ -85,15 +87,14 @@ class conversation extends Model
     /*
      * Подтянем еще и название профиля для вывода имени, а не ида юзера
      */
-    public function profile()
-    {
+    public function profile(): HasOne {
         return $this->hasOne(User::class, 'id', 'who_start');
     }
 
     /*
      * Получим логи выдвигаемого из другой таблицы
      */
-    public function convlog() {
+    public function convlog(): HasOne {
         return $this->hasOne(conv_stats::class, 'conv_id');
     }
 
@@ -108,21 +109,7 @@ class conversation extends Model
     /*
      * Статистика по голосам в голосовании
      */
-    public function convVote() {
+    public function convVote(): HasMany {
         return $this->hasMany(conv_voting::class, 'conv_id');
-    }
-
-    public function countVoteStats($count_id) {
-        return self::find($count_id);
-    }
-
-    public function countVoteStats1($count_id) {
-        $model = self::find($count_id);
-
-        return [
-            'agree' => $model->convVote->sum('agree'),
-            'disagree' => $model->convVote->sum('disagree'),
-            'neutral' => $model->convVote->sum('neutral'),
-        ];
     }
 }

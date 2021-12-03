@@ -12,7 +12,7 @@
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label>Табличка</label>
+                                        @livewire('logs.table')
                                     </div>
                                 </div>
                             </div>
