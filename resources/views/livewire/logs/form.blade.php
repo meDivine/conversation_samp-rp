@@ -39,10 +39,10 @@
                             </div>
                             <div class="col-sm-12 d-flex justify-content-end">
                                 <button type="submit"
-                                        class="btn btn-primary me-1 mb-1">Поиск
+                                        class="btn btn-primary me-1 mb-1" wire:click="updateTable">Поиск
                                 </button>
                                 <button type="reset"
-                                        class="btn btn-light-secondary me-1 mb-1">Скачать
+                                        class="btn btn-light-secondary me-1 mb-1" disabled>[WIP] Скачать
                                 </button>
                             </div>
                         </div>

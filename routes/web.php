@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('/add', function () {
     return view('addadmin');
-})->name('add')->middleware(['auth']);
+})->name('add')->middleware(['auth', 'can_conv']);
 
 Route::get('/settings', function () {
     return view('components.settings.settings');

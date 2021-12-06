@@ -19,7 +19,39 @@ class PlatformProvider extends OrchidServiceProvider
     {
         parent::boot($dashboard);
 
-        // ...
+        $logsPermissions = ItemPermission::group('Права на логи')
+            ->addPermission('ip_auth_search', 'IP Авторизации')
+            ->addPermission('auth_search', 'Авторизация')
+            ->addPermission('ban_ip_search', 'Бан IP')
+            ->addPermission('black_jack_search', 'Блек Джек')
+            ->addPermission('capture_search', 'Войны')
+            ->addPermission('houses_search', 'Дома')
+            ->addPermission('moneys_search', 'Деньги')
+            ->addPermission('donate_search', 'Донат')
+            ->addPermission('durak_search', 'Дурак')
+            ->addPermission('names_search', 'Имена')
+            ->addPermission('inventory_search', 'Инвентарь')
+            ->addPermission('email_search', 'Почты')
+            ->addPermission('bones_search', 'Кости') // хз как игра кости на англ будет
+            ->addPermission('anticheat_search', 'Кики античита')
+            ->addPermission('missions_search', 'Миссии')
+            ->addPermission('punishments_search', 'Наказания')
+            ->addPermission('poker_search', 'Покер')
+            ->addPermission('promo_search', 'Промокоды')
+            ->addPermission('report_search', 'Репорт')
+            ->addPermission('warehouses_search', 'Склад фракции')
+            ->addPermission('supports_search', 'Вопросы сап.')
+            ->addPermission('community_search', 'Сообщества')
+            ->addPermission('tradestore_search', 'Торговая площадка')
+            ->addPermission('fraction_search', 'Фракции');
+
+        $dashboard->registerPermissions($logsPermissions);
+
+        $logsPermissions = ItemPermission::group('Права доступа')
+            ->addPermission('can_conv', 'Может голосовать')
+            ->addPermission('can_start_conv', 'Может выдвигать');
+
+        $dashboard->registerPermissions($logsPermissions);
     }
 
     /**

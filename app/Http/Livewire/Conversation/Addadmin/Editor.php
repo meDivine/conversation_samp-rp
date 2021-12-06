@@ -77,7 +77,7 @@ class Editor extends Component
         $uid = Auth::id();
         $conversation = new conversation();
         $conversationStats = new conv_stats();
-        $convers = $conversation->createConversation(0, $this->social, $this->gamenick, $this->about, $this->realname, $this->leaderships, $uid);
+        $convers = $conversation->createConversation($this->type, $this->social, $this->gamenick, $this->about, $this->realname, $this->leaderships, $uid);
         $conversId = $convers['id'];
         $conversationStats->createConvLog($convers['id'], $convers['nickname']);
         ReportLog::dispatch($conversId, $this->gamenick);

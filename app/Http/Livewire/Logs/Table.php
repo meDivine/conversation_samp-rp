@@ -6,8 +6,19 @@ use Livewire\Component;
 
 class Table extends Component
 {
+    public $userinfo;
+
+    protected $listeners = [
+        'updateTable'
+    ];
+
+    public function updateTable($log) {
+        $this->userinfo = $log;
+    }
+
     public function render()
     {
-        return view('livewire.logs.table');
+        $unfo = $this->userinfo;
+        return view('livewire.logs.table', compact('unfo'));
     }
 }

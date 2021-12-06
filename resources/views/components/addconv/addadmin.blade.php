@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group has-icon-left">
-                                    <label for="first-name-icon">Игровое имя</label>
+                                    <label wire:dirty.class.remove="log" for="first-name-icon">Игровое имя</label>
                                     <div class="position-relative">
                                         <input type="text" class="form-control"
                                                placeholder="Pavel_Snow (прим.)"
