@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Logs;
 use App\Models\Bot;
 use App\Models\conversation;
 use App\Models\User;
@@ -19,8 +20,13 @@ class ConversationController extends Controller
     {
         /*$bot = new Bot();
         return $bot->getRegInfo("Pavel_Snow");*/
-        $conv = new User();
-        return $conv->getEnabledNotifyVK();
+        $logs = new Logs("capture_search","asd", "asd", "09.11.2021", "10.11.2021");
+        $log = $logs->getLogs();
+        echo "<pre>";
+        foreach ($log as $loger => $key) {
+            print_r(array_keys($loger[1]))."<br>";
+        }
+        echo "</pre>";
     }
 
     private function getConvers($id) {

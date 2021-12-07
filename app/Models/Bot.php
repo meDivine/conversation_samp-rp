@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use DOMDocument;
+use Eloquent;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,14 +18,13 @@ use Psr\Http\Message\ResponseInterface;
  * @method static Builder|Bot newModelQuery()
  * @method static Builder|Bot newQuery()
  * @method static Builder|Bot query()
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Bot extends Model
 {
     use HasFactory;
 
-
-    private function Client(): Client
+    public function Client():Client
     {
         return new Client([
             'base_uri' => 'https://logs.samp-rp.su/"',
@@ -44,18 +44,9 @@ class Bot extends Model
     /**
      * @throws GuzzleException
      */
-    private function login(): string
+    public function login(): string
     {
-        $client = new Client([
-            'base_uri' => 'https://logs.samp-rp.su/"',
-            'verify' => false,
-            'allow_redirects' => false,
-            'headers' => [
-                'User-Agent' => 'Mozilla/5.0 (Linux 3.4; rv:64.0) Gecko/20100101 Firefox/15.0',
-                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Content-Type' => 'application/x-www-form-urlencoded'
-            ]
-        ]);
+        $client = $this->Client();
 
         $login = $client->request('POST', '/work/', [
             'form_params' => [
@@ -113,7 +104,7 @@ class Bot extends Model
                 'Property' => $cols[5],
                 'Owner' => $cols[6]
             ];
-            array_push($capture, $captureData); // забьем массив данными
+            $capture[] = $captureData; // забьем массив данными
         }
         unset($capture[0]); // ключ 0 в массиве будет пустым ибо в табличке 1 строка пустая - пропустим ее
         return $capture;
@@ -367,4 +358,5 @@ class Bot extends Model
         unset($report[0]);
         return json_encode($report, JSON_UNESCAPED_UNICODE);
     }
+
 }
