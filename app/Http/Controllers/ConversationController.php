@@ -24,7 +24,7 @@ class ConversationController extends Controller
         $log = $logs->getLogs();
         echo "<pre>";
         foreach ($log as $loger => $key) {
-            print_r(array_keys($loger[1]))."<br>";
+            print_r(array_keys($key))."<br>";
         }
         echo "</pre>";
     }

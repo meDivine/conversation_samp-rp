@@ -17,7 +17,8 @@
         "livewire/livewire": "^2.7",
         "orchid/platform": "^10.21",
         "simplehtmldom/simplehtmldom": "^2.0@RC",
-        "socialiteproviders/vkontakte": "^4.2"
+        "socialiteproviders/vkontakte": "^4.2",
+      "ext-dom": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

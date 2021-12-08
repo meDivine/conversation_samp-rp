@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/toast.css')}}">
     @livewireStyles
 </head>
 
@@ -70,6 +71,7 @@
 <script src="{{asset('assets/js/bootstrap-bundle.min.js')}}"></script>
 <script src="{{asset('assets/js/main.min.js')}}"></script>
 <script src="{{asset('assets/js/choices.min.js')}}"></script>
+<script src="{{asset('assets/js/toast.min.js')}}"></script>
 @livewireScripts
 </body>
 </html>

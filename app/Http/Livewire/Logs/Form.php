@@ -3,15 +3,16 @@
 namespace App\Http\Livewire\Logs;
 
 use App\Classes\Logs;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class Form extends Component
 {
-    public string $type;
-    public string $nickname = "asd";
-    public string $nickname2 = "asd";
-    public string $dateStart = '09.11.2021';
-    public string $dateEnd = '10.11.2021';
+    public $type;
+    public $nickname = "asd";
+    public $nickname2 = "asd";
+    public $dateStart;
+    public $dateEnd;
     public array $result;
     protected $listeners = [
         'updateTable'
@@ -25,7 +26,10 @@ class Form extends Component
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getInfo() {
-        $logs = new Logs($this->type, $this->nickname, $this->nickname2, $this->dateStart, $this->dateEnd);
+        $dateStart = Carbon::parse($this->dateStart);
+        $dateEnd = Carbon::parse($this->dateEnd);
+        $logs = new Logs($this->type, $this->nickname, $this->nickname2,
+            $dateStart->format('d.m.Y'), $dateEnd->format('d.m.Y'));
         $result = $logs->getLogs();
         $this->emit('getLogs', $result);
     }
