@@ -6,8 +6,10 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0|^8.1",
+        "ext-dom": "*",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "jantinnerezo/livewire-alert": "^2.2",
         "laravel/framework": "^8.65",
         "laravel/horizon": "^5.7",
         "laravel/sanctum": "^2.11",
@@ -17,8 +19,7 @@
         "livewire/livewire": "^2.7",
         "orchid/platform": "^10.21",
         "simplehtmldom/simplehtmldom": "^2.0@RC",
-        "socialiteproviders/vkontakte": "^4.2",
-      "ext-dom": "*"
+        "socialiteproviders/vkontakte": "^4.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

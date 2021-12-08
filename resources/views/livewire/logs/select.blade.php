@@ -1,7 +1,7 @@
 <div class="input-group mb-3">
     <label class="input-group-text"
            for="inputGroupSelect01">Тип</label>
-    <select wire:model.lazy="log" class="form-select" id="inputGroupSelect01">
+    <select wire:model="log" class="form-select" id="inputGroupSelect01">
         <option selected>Выбери</option>
         @if(Auth::user()->hasAccess("ip_auth_search"))
             <option value="ip_auth_search">[WIP] IP авторизации</option>

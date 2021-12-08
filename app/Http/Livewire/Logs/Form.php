@@ -22,6 +22,12 @@ class Form extends Component
         $this->type = $log;
     }
 
+    public function updating() {
+        if ($this->type == "capture_search") {
+            $this->dateStart = "disable";
+        }
+    }
+
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -32,6 +38,7 @@ class Form extends Component
             $dateStart->format('d.m.Y'), $dateEnd->format('d.m.Y'));
         $result = $logs->getLogs();
         $this->emit('getLogs', $result);
+
     }
 
     public function render()

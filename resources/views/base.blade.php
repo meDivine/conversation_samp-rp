@@ -72,6 +72,8 @@
 <script src="{{asset('assets/js/main.min.js')}}"></script>
 <script src="{{asset('assets/js/choices.min.js')}}"></script>
 <script src="{{asset('assets/js/toast.min.js')}}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<x-livewire-alert::scripts />
 @livewireScripts
 </body>
 </html>

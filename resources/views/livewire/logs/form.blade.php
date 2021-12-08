@@ -23,11 +23,11 @@
                                 <input type="text" id="first-name" class="form-control"
                                        name="fname" placeholder="Nick_Name">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" >
                                 <label>Дата начала</label>
                             </div>
                             <div class="col-md-8 form-group">
-                                <input type="date" wire:model.lazy="dateStart" class="form-control"
+                                <input type="date" wire:model="dateStart" class="form-control"
                                        placeholder="">
                             </div>
                             <div class="col-md-4">
