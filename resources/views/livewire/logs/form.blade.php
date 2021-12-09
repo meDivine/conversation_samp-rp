@@ -9,7 +9,7 @@
                     <div class="form-body">
                         <div class="row">
                             @livewire('logs.select')
-                            <div class="col-md-4">
+                            <div class="col-md-4" @if($type == "capture_search") disabled @endif>
                                 <label>Игровой ник</label>
                             </div>
                             <div class="col-md-8 form-group">

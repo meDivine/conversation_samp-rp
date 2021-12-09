@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Classes;
+
 use DOMDocument;
 
 class LogsTableManipulate
@@ -20,6 +21,4 @@ class LogsTableManipulate
         $tables = $dom->getElementsByTagName('table');
         return $tables->item(0)->getElementsByTagName('tr');
     }
-
-
 }

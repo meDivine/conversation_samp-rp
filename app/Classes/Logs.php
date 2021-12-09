@@ -25,7 +25,8 @@ class Logs
         $this->dateEnd = $dateEnd;
     }
 
-    private function renameFractionByID($id):string {
+    private function renameFractionByID($id): string
+    {
         $fraction = new Fraction();
         return $fraction->renameFracName($id);
     }
@@ -39,13 +40,23 @@ class Logs
     /**
      * @throws GuzzleException
      */
-    private function getCaptureLog(): array {
+    private function getCaptureLog(): array
+    {
         /*
          * Создадим экземпляр класса и выполним запрос
          * Нам вернётся html документ
          */
-        $logsTableResponse = new LogsTableResponse("capture", null, null, $this->dateStart, $this->dateEnd,
-            null, null , "time_diapzon_1", "time_diapzon_2");
+        $logsTableResponse = new LogsTableResponse(
+            "capture",
+            null,
+            null,
+            $this->dateStart,
+            $this->dateEnd,
+            null,
+            null,
+            "time_diapzon_1",
+            "time_diapzon_2"
+        );
         /*
          * Обработаем документ и вернем готовые данные
          */
@@ -55,28 +66,27 @@ class Logs
         foreach ($rows as $row) { // пройдемся циклом по таблице
             $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
             $captureStruct = [
-                'Server Time' => trim($cols[1]->nodeValue ?? null,"[]"), // удаляем лишнее
-                'Server' => (int)trim($cols[2]->nodeValue ?? null,"[]"),
-                'Fraction' => $this->renameFractionByID((int)trim($cols[3]->nodeValue ?? 1,"[]")), // поменяем название фракции c ида на имя
-                'Player' => trim($cols[4]->nodeValue ?? null,"[]"),
-                'Property' => (int)trim($cols[5]->nodeValue ?? null,"[]"),
-                'Owner' => $this->renameFractionByID((int)trim($cols[6]->nodeValue ?? 1,"[]")),
+                'Server Time' => trim($cols[1]->nodeValue ?? null, "[]"), // удаляем лишнее
+                'Server' => (int)trim($cols[2]->nodeValue ?? null, "[]"),
+                'Fraction' => $this->renameFractionByID((int)trim($cols[3]->nodeValue ?? 1, "[]")), // поменяем название фракции c ида на имя
+                'Player' => trim($cols[4]->nodeValue ?? null, "[]"),
+                'Property' => (int)trim($cols[5]->nodeValue ?? null, "[]"),
+                'Owner' => $this->renameFractionByID((int)trim($cols[6]->nodeValue ?? 1, "[]")),
             ];
             $capture[] = $captureStruct; // заполняем массив
         }
         unset($capture[0]); // удалим массив с ключом 0 ибо он всегда null в нашем случае
-        return $capture; // вернем значение
+        return $capture ?? []; // вернем значение
     }
 
-    /*
-     * Берем лог имён
-     */
+
 
 
     /**
      * @throws GuzzleException
      */
-    public function getLogs():array {
+    public function getLogs(): array
+    {
         if ($this->type == "capture_search") {
             return $this->getCaptureLog();
         }

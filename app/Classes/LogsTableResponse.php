@@ -16,9 +16,17 @@ class LogsTableResponse
     public $postInputThree;
     public $postInputFour;
 
-    public function __construct($link, $nicknameOne, $nicknameTwo, $time_diapazon_1, $time_diapazon_2,
-                                $postInputOne, $postInputTwo, $postInputThree, $postInputFour)
-    {
+    public function __construct(
+        $link,
+        $nicknameOne,
+        $nicknameTwo,
+        $time_diapazon_1,
+        $time_diapazon_2,
+        $postInputOne,
+        $postInputTwo,
+        $postInputThree,
+        $postInputFour
+    ) {
         $this->link = $link;
         $this->nicknameOne = $nicknameOne;
         $this->nicknameTwo = $nicknameTwo;
