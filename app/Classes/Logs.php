@@ -79,7 +79,41 @@ class Logs
         return $capture ?? []; // вернем значение
     }
 
+    /**
+     * Возьмем логи ников
+     */
 
+    private function getNickNameLog(): array
+    {
+        $logsTableResponse = new LogsTableResponse(
+            "changename",
+            $this->nicknameOne,
+            null,
+            null,
+            null,
+            "user_name",
+            null,
+            null,
+            null
+        );
+        $table = $logsTableResponse->responseToLogsSampRp();
+        dd($table);
+        $rows = $this->tableToDom($table);
+        $nicknames = [];
+        foreach ($rows as $row) {
+            $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
+            $nicknameColumns = [
+                'Date' => trim($cols[1]->nodeValue ?? null, "[]"),
+                'Serv' => trim($cols[2]->nodeValue ?? null, "[]"),
+                'Adm' => trim($cols[3]->nodeValue ?? null, "[]"),
+                'OldName' => trim($cols[4]->nodeValue ?? null, "[]"),
+                'New Name' => trim($cols[5]->nodeValue ?? null, "[]"),
+            ];
+            $nicknames[] = $nicknameColumns;
+        }
+        unset($nicknames[0]);
+        return $nicknames ?? [];
+    }
 
 
     /**
@@ -87,8 +121,13 @@ class Logs
      */
     public function getLogs(): array
     {
-        if ($this->type == "capture_search") {
-            return $this->getCaptureLog();
+        switch ($this->type) {
+            case "capture_search":
+                return $this->getCaptureLog();
+                break;
+            case "names_search":
+                return $this->getNickNameLog();
+                break;
         }
     }
 }

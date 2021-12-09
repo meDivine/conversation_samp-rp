@@ -9,8 +9,8 @@ use Livewire\Component;
 class Form extends Component
 {
     public $type;
-    public $nickname = "asd";
-    public $nickname2 = "asd";
+    public $nickname;
+    public $nickname2;
     public $dateStart;
     public $dateEnd;
     public array $result;
@@ -21,13 +21,6 @@ class Form extends Component
     public function updateTable($log)
     {
         $this->type = $log;
-    }
-
-    public function updating()
-    {
-        if ($this->type == "capture_search") {
-            $this->dateStart = "disable";
-        }
     }
 
     /**
@@ -48,10 +41,94 @@ class Form extends Component
         $this->emit('getLogs', $result);
     }
 
+    public function updated()
+    {
+        $this->setFirstNickHidden();
+        $this->setSecondNickHidden();
+        $this->setStartDateHidden();
+        $this->setEndDateHidden();
+    }
+
+    /**
+     * Сравним тип лога, и уберем лишние даннные с формы
+     */
+
+    private function setFirstNickHidden()
+    {
+        switch ($this->type) {
+            case "capture_search":
+                return true;
+                break;
+            default:
+                return false;
+                break;
+        }
+    }
+
+    private function setSecondNickHidden()
+    {
+        switch ($this->type) {
+            case "capture_search":
+                return true;
+                break;
+            case "names_search":
+                return true;
+                break;
+            default:
+                return false;
+                break;
+        }
+    }
+
+    private function setStartDateHidden()
+    {
+        switch ($this->type) {
+            case "names_search":
+                return true;
+                break;
+            default:
+                return false;
+                break;
+        }
+    }
+
+    private function setEndDateHidden()
+    {
+        switch ($this->type) {
+            case "names_search":
+                return true;
+                break;
+            default:
+                return false;
+                break;
+        }
+    }
+    /**
+     * Взять имя колонки может быть ник или ип адрес
+     * Поэтому будем динамически менять данные
+     *
+     * @return void
+     */
+    private function getFirstName()
+    {
+        switch ($this->type) {
+            case "names_search":
+                return true;
+                break;
+        }
+    }
+
+    private function getSecondName()
+    {
+    }
+
     public function render()
     {
         return view('livewire.logs.form', [
-            'type' => $this->type,
+            'stateFirstName' => $this->setFirstNickHidden(),
+            'stateSecondName' => $this->setSecondNickHidden(),
+            'stateDateState' => $this->setStartDateHidden(),
+            'endDateState' => $this->setEndDateHidden(),
         ]);
     }
 }

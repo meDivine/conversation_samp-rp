@@ -9,31 +9,31 @@
                     <div class="form-body">
                         <div class="row">
                             @livewire('logs.select')
-                            <div class="col-md-4" @if($type == "capture_search") disabled @endif>
+                            <div class="col-md-4" @if($stateFirstName) hidden @endif>
                                 <label>Игровой ник</label>
                             </div>
-                            <div class="col-md-8 form-group">
-                                <input type="text" id="first-name" class="form-control"
+                            <div class="col-md-8 form-group" @if($stateFirstName) hidden @endif>
+                                <input type="text" wire:model.lazy="nickname" id="first-name" class="form-control"
                                        name="fname" placeholder="Nick_Name">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" @if($stateSecondName) hidden @endif>
                                 <label>Второй ник</label>
                             </div>
-                            <div class="col-md-8 form-group">
-                                <input type="text" id="first-name" class="form-control"
+                            <div class="col-md-8 form-group" @if($stateSecondName) hidden @endif>
+                                <input type="text" wire:model="nickname2" id="first-name" class="form-control"
                                        name="fname" placeholder="Nick_Name">
                             </div>
-                            <div class="col-md-4" >
+                            <div class="col-md-4" @if($stateDateState) hidden @endif>
                                 <label>Дата начала</label>
                             </div>
-                            <div class="col-md-8 form-group">
+                            <div class="col-md-8 form-group" @if($stateDateState) hidden @endif>
                                 <input type="date" wire:model="dateStart" class="form-control"
                                        placeholder="">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" @if($endDateState) hidden @endif>
                                 <label>Дата окончания</label>
                             </div>
-                            <div class="col-md-8 form-group">
+                            <div class="col-md-8 form-group" @if($endDateState) hidden @endif>
                                 <input type="date" wire:model.lazy="dateEnd" class="form-control"
                                        placeholder="data">
                             </div>

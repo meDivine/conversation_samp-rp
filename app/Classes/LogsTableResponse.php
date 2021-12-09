@@ -15,7 +15,19 @@ class LogsTableResponse
     public $postInputTwo;
     public $postInputThree;
     public $postInputFour;
-
+/**
+ * Undocumented function
+ *
+ * @param [type] $link
+ * @param [type] $nicknameOne
+ * @param [type] $nicknameTwo
+ * @param [type] $time_diapazon_1
+ * @param [type] $time_diapazon_2
+ * @param [type] $postInputOne
+ * @param [type] $postInputTwo
+ * @param [type] $postInputThree
+ * @param [type] $postInputFour
+ */
     public function __construct(
         $link,
         $nicknameOne,
