@@ -103,11 +103,11 @@ class Logs
         foreach ($rows as $row) {
             $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
             $nicknameColumns = [
-                'Date' => trim($cols[1]->nodeValue ?? null, "[]"),
-                'Serv' => trim($cols[2]->nodeValue ?? null, "[]"),
-                'Adm' => trim($cols[3]->nodeValue ?? null, "[]"),
-                'OldName' => trim($cols[4]->nodeValue ?? null, "[]"),
-                'New Name' => trim($cols[5]->nodeValue ?? null, "[]"),
+                'Дата/время' => trim($cols[0]->nodeValue ?? null, "[]"),
+                'Сервер' => trim($cols[1]->nodeValue ?? null, "[]"),
+                'Администратор' => trim($cols[2]->nodeValue ?? null, "[]"),
+                'Старое имя' => trim($cols[3]->nodeValue ?? null, "[]"),
+                'Новое имя' => trim($cols[4]->nodeValue ?? null, "[]"),
             ];
             $nicknames[] = $nicknameColumns;
         }
@@ -116,6 +116,77 @@ class Logs
     }
 
 
+    /*
+     * Логи складов фракции
+     */
+
+    public function getFractions() {
+        $logsTableResponse = new LogsTableResponse(
+            "inunvite",
+            $this->nicknameOne,
+            $this->nicknameTwo,
+            $this->dateStart,
+            $this->dateEnd,
+            "Leader",
+            "Player",
+            "time_diapzon_1",
+            "time_diapzon_2"
+        );
+        $table = $logsTableResponse->responseToLogsSampRpFraction();
+        $rows = $this->tableToDom($table);
+        $fracLog = [];
+        foreach ($rows as $row) {
+            $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
+            $fracTemplate = [
+                'Дата/время' => trim($cols[1]->nodeValue ?? null, "[]"),
+                'Сервер' => trim($cols[2]->nodeValue ?? null, "[]"),
+                'Тип' => trim($cols[3]->nodeValue ?? null, "[]"),
+                'Лидер' => trim($cols[4]->nodeValue ?? null, "[]"),
+                'Игрок' => trim($cols[5]->nodeValue ?? null, "[]"),
+                'Фракция' => trim($cols[6]->nodeValue ?? null, "[]"),
+                'Ранг' => trim($cols[7]->nodeValue ?? null, "[]"),
+                'Причина' => trim($cols[8]->nodeValue ?? null, "[]"),
+            ];
+            $fracLog[] = $fracTemplate;
+        }
+        unset($fracLog[0]);
+        return $fracLog ?? []; // вернем пустой массив если парсер выдал пустые данные
+    }
+
+    private function getIpAuth() {
+        $logsTableResponse = new LogsTableResponse(
+            "login",
+            $this->nicknameOne,
+            $this->nicknameTwo,
+            $this->dateStart,
+            $this->dateEnd,
+            "Player",
+            "PlayerIP",
+            "time_diapzon_1",
+            "time_diapzon_2"
+        );
+
+        $table = $logsTableResponse->responseToLogsSampRpFraction();
+        $rows = $this->tableToDom($table);
+        $ipLog = [];
+        foreach ($rows as $row) {
+            $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
+            $ip = trim($cols[4]->nodeValue ?? null, "[]");
+            $ipapi = new ipApi($ip);
+            $ipInfo = $ipapi->getIpInfo();
+            $ipAuthTemplate = [
+                'Дата/время' => trim($cols[1]->nodeValue ?? null, "[]"),
+                'Сервер' => trim($cols[2]->nodeValue ?? null, "[]"),
+                'Игрок' => trim($cols[3]->nodeValue ?? null, "[]"),
+                'IP Игрока' => $ip,
+                'Страна' => $ipInfo->country_name,
+                'Регион' => $ipInfo->region,
+                'Город' => $ipInfo->region,
+                'Провайдер' => $cols[7]->nodeValue ?? null
+            ];
+        }
+    }
+
     /**
      * @throws GuzzleException
      */
@@ -123,7 +194,7 @@ class Logs
         $logsTableResponse = new LogsTableResponse(
             "kickban",
             $this->nicknameOne,
-            "",
+            $this->nicknameTwo,
             $this->dateStart,
             $this->dateEnd,
             "Player",
@@ -137,12 +208,12 @@ class Logs
         foreach ($rows as $row) {
             $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
             $nicknameColumns = [
-                'DateTime' => $cols[1]->nodeValue ?? null,
-                'Server' => $cols[2]->nodeValue ?? null,
-                'Type' => $cols[3]->nodeValue ?? null,
-                'Admin' => $cols[4]->nodeValue ?? null,
-                'Player' => $cols[5]->nodeValue ?? null,
-                'Reason' => $cols[6]->nodeValue ?? null
+                'Дата/время' => trim($cols[1]->nodeValue ?? null, "[]"),
+                'Сервер' => trim($cols[2]->nodeValue ?? null, "[]"),
+                'Тип' => trim($cols[3]->nodeValue ?? null, "[]"),
+                'Админ' => trim($cols[4]->nodeValue ?? null, "[]"),
+                'Игрок' => trim($cols[5]->nodeValue ?? null, "[]"),
+                'Причина' => $cols[6]->nodeValue ?? null
             ];
             $nicknames[] = $nicknameColumns;
         }
@@ -157,12 +228,12 @@ class Logs
         switch ($this->type) {
             case "capture_search":
                 return $this->getCaptureLog();
-                break;
             case "names_search":
                 return $this->getNickNameLog();
-                break;
             case "punishments_search":
                 return $this->getPunishments();
+            case "fraction_search":
+                return $this->getFractions();
         }
     }
 }

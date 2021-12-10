@@ -9,8 +9,8 @@ use Livewire\Component;
 class Form extends Component
 {
     public $type;
-    public string $nickname = "";
-    public string $nickname2 = "";
+    public $nickname;
+    public $nickname2;
     public $dateStart;
     public $dateEnd;
     public array $result;
@@ -41,13 +41,6 @@ class Form extends Component
         $this->emit('getLogs', $result);
     }
 
-    public function updated()
-    {
-        $this->setFirstNickHidden();
-        $this->setSecondNickHidden();
-        $this->setStartDateHidden();
-        $this->setEndDateHidden();
-    }
 
     /**
      * Сравним тип лога, и уберем лишние даннные с формы
@@ -71,14 +64,10 @@ class Form extends Component
 
     private function setStartDateHidden()
     {
-        switch ($this->type) {
-            case "names_search":
-                return true;
-                break;
-            default:
-                return false;
-                break;
-        }
+        return match ($this->type) {
+            "names_search" => true,
+            default => false,
+        };
     }
 
     private function setEndDateHidden()
@@ -96,19 +85,22 @@ class Form extends Component
      * Взять имя колонки может быть ник или ип адрес
      * Поэтому будем динамически менять данные
      *
-     * @return void
+     * @return string
      */
     private function getFirstName()
     {
-        switch ($this->type) {
-            case "names_search":
-                return true;
-                break;
-        }
+        return match ($this->type) {
+            "fraction_search" => "Лидер",
+            default => "Игровой ник",
+        };
     }
 
     private function getSecondName()
     {
+        return match ($this->type) {
+            "fraction_search" => "Игрок",
+            default => "Игровой ник",
+        };
     }
 
     public function render()
@@ -118,6 +110,8 @@ class Form extends Component
             'stateSecondName' => $this->setSecondNickHidden(),
             'stateDateState' => $this->setStartDateHidden(),
             'endDateState' => $this->setEndDateHidden(),
+            'getFirstNameText' => $this->getFirstName(),
+            'getSecondNameText' => $this->getSecondName()
         ]);
     }
 }

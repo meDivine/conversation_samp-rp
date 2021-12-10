@@ -10,14 +10,14 @@
                         <div class="row">
                             @livewire('logs.select')
                             <div class="col-md-4" @if($stateFirstName) hidden @endif>
-                                <label>Игровой ник</label>
+                                <label>{{ $getFirstNameText }}</label>
                             </div>
                             <div class="col-md-8 form-group" @if($stateFirstName) hidden @endif>
                                 <input type="text" wire:model.lazy="nickname" id="first-name" class="form-control"
                                        name="fname" placeholder="Nick_Name">
                             </div>
                             <div class="col-md-4" @if($stateSecondName) hidden @endif>
-                                <label>Второй ник</label>
+                                <label>{{ $getSecondNameText }}</label>
                             </div>
                             <div class="col-md-8 form-group" @if($stateSecondName) hidden @endif>
                                 <input type="text" wire:model="nickname2" id="first-name" class="form-control"

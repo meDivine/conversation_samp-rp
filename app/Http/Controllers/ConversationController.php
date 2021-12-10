@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\ipApi;
 use App\Classes\Logs;
 use App\Models\Bot;
 use App\Models\conversation;
+use App\Models\Fraction;
 use App\Models\User;
 use GuzzleHttp\Client;
 
@@ -20,13 +22,15 @@ class ConversationController extends Controller
     {
         /*$bot = new Bot();
         return $bot->getRegInfo("Pavel_Snow");*/
-        $logs = new Logs("capture_search","asd", "asd", "09.11.2021", "10.11.2021");
+       /* $logs = new Logs("capture_search","asd", "asd", "09.11.2021", "10.11.2021");
         $log = $logs->getLogs();
         echo "<pre>";
         foreach ($log as $loger => $key) {
             print_r(array_keys($key))."<br>";
         }
-        echo "</pre>";
+        echo "</pre>";*/
+        $frac = new ipApi("8.8.8.8");
+        return $frac->getIpInfo();
     }
 
     private function getConvers($id) {

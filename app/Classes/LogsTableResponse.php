@@ -2,7 +2,6 @@
 
 namespace App\Classes;
 
-use App\Models\Bot;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 
@@ -101,14 +100,72 @@ class LogsTableResponse
         ]);
 
         return $client->request('POST', "/work/$this->link.php", [
+            'debug' => fopen('php://stderr', 'w'),
             'headers' => [
                 'Cookie' => $this->login()
             ],
             'form_params' => [
-                $this->postInputOne = $this->nicknameOne,
-                $this->postInputTwo = $this->nicknameTwo,
+                $this->postInputOne => $this->nicknameOne,
+                $this->postInputTwo => $this->nicknameTwo,
                 $this->postInputThree => $this->time_diapazon_1,
                 $this->postInputFour => $this->time_diapazon_2,
+            ]
+        ]);
+    }
+
+    public function responseToLogsSampRpFraction(): ResponseInterface
+    {
+        $client = new Client([
+            'base_uri' => 'https://logs.samp-rp.su/"',
+            'verify' => false,
+            'allow_redirects' => false,
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0 (Linux 3.4; rv:64.0) Gecko/20100101 Firefox/15.0',
+                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Content-Type' => 'application/x-www-form-urlencoded'
+            ]
+        ]);
+
+        return $client->request('POST', "/work/$this->link.php", [
+            'debug' => fopen('php://stderr', 'w'),
+            'headers' => [
+                'Cookie' => $this->login()
+            ],
+            'form_params' => [
+                $this->postInputOne => $this->nicknameOne,
+                $this->postInputTwo => $this->nicknameTwo,
+                $this->postInputThree => $this->time_diapazon_1,
+                $this->postInputFour => $this->time_diapazon_2,
+                'GangID_1' => true,
+                'GangID_17' => true,
+                'GangID_19' => true,
+                'GangID_18' => true,
+                'GangID_2' => true,
+                'GangID_3' => true,
+                'GangID_7' => true,
+                'GangID_4' => true,
+                'GangID_5' => true,
+                'GangID_6' => true,
+                'GangID_8' => true,
+                'GangID_9' => true,
+                'GangID_10' => true,
+                'GangID_21' => true,
+                'GangID_11' => true,
+                'GangID_12' => true,
+                'GangID_13' => true,
+                'GangID_14' => true,
+                'GangID_15' => true,
+                'GangID_16' => true,
+                'GangID_22' => true,
+                'GangID_23' => true,
+                'GangID_24' => true,
+                'GangID_25' => true,
+                'GangID_26' => true,
+                'GangID_27' => true,
+                'GangID_28' => true,
+                'GangID_29' => true,
+                'GangID_30' => true,
+                'GangID_31' => true,
             ]
         ]);
     }
