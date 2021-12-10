@@ -81,6 +81,7 @@ class Logs
 
     /**
      * Возьмем логи ников
+     * @throws GuzzleException
      */
 
     private function getNickNameLog(): array
@@ -88,16 +89,15 @@ class Logs
         $logsTableResponse = new LogsTableResponse(
             "changename",
             $this->nicknameOne,
-            null,
+            "rename",
             null,
             null,
             "user_name",
-            null,
+            "log",
             null,
             null
         );
         $table = $logsTableResponse->responseToLogsSampRp();
-        dd($table);
         $rows = $this->tableToDom($table);
         $nicknames = [];
         foreach ($rows as $row) {
@@ -119,7 +119,40 @@ class Logs
     /**
      * @throws GuzzleException
      */
-    public function getLogs(): array
+    private function getPunishments() {
+        $logsTableResponse = new LogsTableResponse(
+            "kickban",
+            $this->nicknameOne,
+            "",
+            $this->dateStart,
+            $this->dateEnd,
+            "Player",
+            "Admin",
+            "time_diapzon_1",
+            "time_diapzon_2"
+        );
+        $table = $logsTableResponse->responseToLogsSampRp();
+        $rows = $this->tableToDom($table);
+        $nicknames = [];
+        foreach ($rows as $row) {
+            $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
+            $nicknameColumns = [
+                'DateTime' => $cols[1]->nodeValue ?? null,
+                'Server' => $cols[2]->nodeValue ?? null,
+                'Type' => $cols[3]->nodeValue ?? null,
+                'Admin' => $cols[4]->nodeValue ?? null,
+                'Player' => $cols[5]->nodeValue ?? null,
+                'Reason' => $cols[6]->nodeValue ?? null
+            ];
+            $nicknames[] = $nicknameColumns;
+        }
+        unset($nicknames[0]);
+        return $nicknames ?? [];
+    }
+    /**
+     * @throws GuzzleException
+     */
+    public function getLogs()
     {
         switch ($this->type) {
             case "capture_search":
@@ -128,6 +161,8 @@ class Logs
             case "names_search":
                 return $this->getNickNameLog();
                 break;
+            case "punishments_search":
+                return $this->getPunishments();
         }
     }
 }

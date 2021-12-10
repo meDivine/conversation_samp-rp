@@ -9,8 +9,8 @@ use Livewire\Component;
 class Form extends Component
 {
     public $type;
-    public $nickname;
-    public $nickname2;
+    public string $nickname = "";
+    public string $nickname2 = "";
     public $dateStart;
     public $dateEnd;
     public array $result;
@@ -53,31 +53,20 @@ class Form extends Component
      * Сравним тип лога, и уберем лишние даннные с формы
      */
 
-    private function setFirstNickHidden()
+    private function setFirstNickHidden(): bool
     {
-        switch ($this->type) {
-            case "capture_search":
-                return true;
-                break;
-            default:
-                return false;
-                break;
-        }
+        return match ($this->type) {
+            "capture_search" => true,
+            default => false,
+        };
     }
 
-    private function setSecondNickHidden()
+    private function setSecondNickHidden(): bool
     {
-        switch ($this->type) {
-            case "capture_search":
-                return true;
-                break;
-            case "names_search":
-                return true;
-                break;
-            default:
-                return false;
-                break;
-        }
+        return match ($this->type) {
+            "capture_search", "names_search" => true,
+            default => false,
+        };
     }
 
     private function setStartDateHidden()

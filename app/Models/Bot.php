@@ -27,9 +27,9 @@ class Bot extends Model
     public function Client():Client
     {
         return new Client([
-            'base_uri' => 'https://logs.samp-rp.su/"',
+            'base_uri' => 'https://logs.samp-rp.su/work/"',
             'verify' => false,
-            'allow_redirects' => false,
+            'allow_redirects' => true,
             'headers' => [
                 'User-Agent' => 'Mozilla/5.0 (Linux 3.4; rv:64.0) Gecko/20100101 Firefox/15.0',
                 'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',

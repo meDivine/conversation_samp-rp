@@ -15,8 +15,10 @@ class LogsTableManipulate
 
     public function tableToDom()
     {
+        $tablePos = $this->table->getBody()->getContents();
+        dd($tablePos);
         $dom = new domDocument();
-        $dom->loadHTML($this->table);
+        $dom->loadHTML("\xEF\xBB\xBF" . $tablePos, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $dom->preserveWhiteSpace = false;
         $tables = $dom->getElementsByTagName('table');
         return $tables->item(0)->getElementsByTagName('tr');
