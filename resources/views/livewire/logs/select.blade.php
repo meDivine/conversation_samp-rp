@@ -4,7 +4,7 @@
     <select wire:model="log" class="form-select" id="inputGroupSelect01">
         <option selected>Выбери</option>
         @if(Auth::user()->hasAccess("ip_auth_search"))
-            <option value="ip_auth_search">[WIP] IP авторизации</option>
+            <option value="ip_auth_search">IP авторизации</option>
         @endif
         @if (Auth::user()->hasAccess("auth_search"))
             <option value="auth_search">[WIP] Авторизация</option>

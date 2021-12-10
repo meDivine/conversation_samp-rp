@@ -12,6 +12,7 @@ class Tableconv extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+
     public function render()
     {
         $all = conversation::whereNull('who_close')

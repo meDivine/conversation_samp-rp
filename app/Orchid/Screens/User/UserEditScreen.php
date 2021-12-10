@@ -27,7 +27,7 @@ class UserEditScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Edit User';
+    public $name = 'Пользоватеь';
 
     /**
      * Display header description.
@@ -113,7 +113,7 @@ class UserEditScreen extends Screen
                         ->method('save')
                 ),
 
-            Layout::block(UserPasswordLayout::class)
+           /* Layout::block(UserPasswordLayout::class)
                 ->title(__('Password'))
                 ->description(__('Ensure your account is using a long, random password to stay secure.'))
                 ->commands(
@@ -122,7 +122,7 @@ class UserEditScreen extends Screen
                         ->icon('check')
                         ->canSee($this->user->exists)
                         ->method('save')
-                ),
+                ),*/
 
             Layout::block(UserRoleLayout::class)
                 ->title(__('Roles'))

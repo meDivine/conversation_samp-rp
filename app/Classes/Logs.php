@@ -2,9 +2,7 @@
 
 namespace App\Classes;
 
-use App\Models\Bot;
 use App\Models\Fraction;
-use DOMNodeList;
 use GuzzleHttp\Exception\GuzzleException;
 
 
@@ -153,7 +151,44 @@ class Logs
         return $fracLog ?? []; // вернем пустой массив если парсер выдал пустые данные
     }
 
-    private function getIpAuth() {
+    public function getWarehouses(): array
+    {
+        $logsTableResponse = new LogsTableResponse(
+            "gangbank",
+            $this->nicknameOne,
+            null,
+            $this->dateStart,
+            $this->dateEnd,
+            "Player",
+            null,
+            "time_diapzon_1",
+            "time_diapzon_2"
+        );
+        $fracRename = new Fraction();
+        $table = $logsTableResponse->responseToLogsSampRpWarehouses();
+        $rows = $this->tableToDom($table);
+        $fracLog = [];
+        foreach ($rows as $row) {
+            $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
+            $fracTemplate = [
+                'Дата/время' => trim($cols[1]->nodeValue ?? null, "[]"),
+                'Сервер' => trim($cols[2]->nodeValue ?? null, "[]"),
+                'Фракция' => $fracRename->renameFracName(trim($cols[3]->nodeValue ?? null, "[]") ?? 1) ?? 1,
+                'Действие' => trim($cols[4]->nodeValue ?? null, "[]"),
+                'Игрок' => trim($cols[5]->nodeValue ?? null, "[]"),
+                'Значение' => trim($cols[6]->nodeValue ?? null, "[]"),
+            ];
+            $fracLog[] = $fracTemplate;
+        }
+        unset($fracLog[0]);
+        return $fracLog ?? []; // вернем пустой массив если парсер выдал пустые данные
+    }
+
+    /*
+     * Входы игроков по ипам
+     */
+    private function getIpAuth(): array
+    {
         $logsTableResponse = new LogsTableResponse(
             "login",
             $this->nicknameOne,
@@ -173,18 +208,21 @@ class Logs
             $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
             $ip = trim($cols[4]->nodeValue ?? null, "[]");
             $ipapi = new ipApi($ip);
-            $ipInfo = $ipapi->getIpInfo();
+            $ipInfo = json_decode($ipapi->getIpInfo());
             $ipAuthTemplate = [
                 'Дата/время' => trim($cols[1]->nodeValue ?? null, "[]"),
                 'Сервер' => trim($cols[2]->nodeValue ?? null, "[]"),
                 'Игрок' => trim($cols[3]->nodeValue ?? null, "[]"),
                 'IP Игрока' => $ip,
-                'Страна' => $ipInfo->country_name,
+                'Страна' => $ipapi->getCountryFlag($ipInfo->country_code) . $ipInfo->country_name,
                 'Регион' => $ipInfo->region,
                 'Город' => $ipInfo->region,
-                'Провайдер' => $cols[7]->nodeValue ?? null
+                'Провайдер' => $ipInfo->org
             ];
+            $ipLog[] = $ipAuthTemplate;
         }
+        unset($ipLog[0]);
+        return $ipLog ?? [];
     }
 
     /**
@@ -232,8 +270,10 @@ class Logs
                 return $this->getNickNameLog();
             case "punishments_search":
                 return $this->getPunishments();
-            case "fraction_search":
-                return $this->getFractions();
+            case "ip_auth_search":
+                return $this->getIpAuth();
+            case "warehouses_search":
+                return $this->getWarehouses();
         }
     }
 }

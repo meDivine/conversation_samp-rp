@@ -57,12 +57,12 @@ class Form extends Component
     private function setSecondNickHidden(): bool
     {
         return match ($this->type) {
-            "capture_search", "names_search" => true,
+            "capture_search", "names_search", "warehouses_search" => true,
             default => false,
         };
     }
 
-    private function setStartDateHidden()
+    private function setStartDateHidden(): bool
     {
         return match ($this->type) {
             "names_search" => true,
@@ -70,16 +70,12 @@ class Form extends Component
         };
     }
 
-    private function setEndDateHidden()
+    private function setEndDateHidden(): bool
     {
-        switch ($this->type) {
-            case "names_search":
-                return true;
-                break;
-            default:
-                return false;
-                break;
-        }
+        return match ($this->type) {
+            "names_search" => true,
+            default => false,
+        };
     }
     /**
      * Взять имя колонки может быть ник или ип адрес
@@ -87,10 +83,12 @@ class Form extends Component
      *
      * @return string
      */
-    private function getFirstName()
+    private function getFirstName(): string
     {
         return match ($this->type) {
             "fraction_search" => "Лидер",
+            "ip_auth_search" => "[!p]Игровой ник",
+            "warehouses_search" => "[!] Игровой ник",
             default => "Игровой ник",
         };
     }
@@ -99,6 +97,7 @@ class Form extends Component
     {
         return match ($this->type) {
             "fraction_search" => "Игрок",
+            "ip_auth_search" => "[!p]IP игрока",
             default => "Игровой ник",
         };
     }

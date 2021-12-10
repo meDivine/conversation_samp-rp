@@ -29,9 +29,9 @@
                                     <div class="form-group has-icon-left">
                                         <labe>Тип выдвижения</labe>
                                         <fieldset class="form-group">
-                                            <select wire:model.lazy="type" class="form-select" id="basicSelect">
-                                                <option value="1">Администратор</option>
-                                                <option value="2">Игровой помощник</option>
+                                            <select wire:model="type" class="form-select" id="basicSelect">
+                                                <option value="0">Администратор</option>
+                                                <option value="1">Игровой помощник</option>
                                             </select>
                                         </fieldset>
                                         @error('gamenick')

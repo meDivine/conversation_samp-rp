@@ -37,7 +37,7 @@ class ConversationSend implements ShouldQueue
         $observer = new CaptureLog();
         $user = new User();
         $vkToSend = $user->getEnabledNotifyConversation();
-        $message = "Начато голосование\nВыдвигают: $this->user\nПроголосовать: zerotwo.monster/c/$this->link";
+        $message = "Начато голосование\nВыдвигают: $this->user\nПроголосовать\nhttps://zerotwo.monster/c/$this->link";
         foreach ($vkToSend as $key) {
             $observer->sendVkMess($key->vk_id, $message);
         }

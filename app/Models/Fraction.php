@@ -28,12 +28,7 @@ class Fraction extends Model
     public $timestamps = false;
 
     public function renameFracName($id): string {
-        $frac = self::find($id ?? 1);
-        return $frac->frac_name;
-    }
-
-    public function getAllFration(): Collection|array
-    {
-        return self::all();
+        $frac = self::find($id);
+        return $frac->frac_name ?? "none";
     }
 }

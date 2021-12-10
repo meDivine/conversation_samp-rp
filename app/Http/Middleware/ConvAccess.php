@@ -18,6 +18,6 @@ class ConvAccess
     public function handle()
     {
         if (!Auth::user()->hasAccess("can_conv"))
-            return redirect()->back();
+            return redirect("/");
     }
 }

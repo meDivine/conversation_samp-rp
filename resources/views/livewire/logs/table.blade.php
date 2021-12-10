@@ -5,8 +5,9 @@
         </div>
         <div class="card-content">
             <div class="card-body">
-                <p class="card-text">Тут мб какая то информация
-                </p>
+                <p class="card-text">[!] - необязательное поле</p>
+                <p class="card-text">[p] - возможность поиска по части данных (долгий поиск)</p>
+                <p class="card-text">[!p] - обе функции</p>
                 <!-- Table with outer spacing -->
                 @if (isset($unfo) ?? !empty($keys))
                         <div class="table-responsive">

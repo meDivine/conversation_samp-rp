@@ -69,6 +69,9 @@ class LogsTableResponse
         ]);
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     private function login(): string
     {
         $client = $this->Client();
@@ -166,6 +169,54 @@ class LogsTableResponse
                 'GangID_29' => true,
                 'GangID_30' => true,
                 'GangID_31' => true,
+            ]
+        ]);
+    }
+
+    public function responseToLogsSampRpWarehouses(): ResponseInterface
+    {
+        $client = new Client([
+            'base_uri' => 'https://logs.samp-rp.su/"',
+            'verify' => false,
+            'allow_redirects' => false,
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0 (Linux 3.4; rv:64.0) Gecko/20100101 Firefox/15.0',
+                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Content-Type' => 'application/x-www-form-urlencoded'
+            ]
+        ]);
+
+        return $client->request('POST', "/work/$this->link.php", [
+            'debug' => fopen('php://stderr', 'w'),
+            'headers' => [
+                'Cookie' => $this->login()
+            ],
+            'form_params' => [
+                $this->postInputOne => $this->nicknameOne,
+                $this->postInputTwo => $this->nicknameTwo,
+                $this->postInputThree => $this->time_diapazon_1,
+                $this->postInputFour => $this->time_diapazon_2,
+                'val_5' => true,
+                'val_6' => true,
+                'val_8' => true,
+                'val_9' => true,
+                'val_10' => true,
+                'val_21' => true,
+                'val_12' => true,
+                'val_13' => true,
+                'val_14' => true,
+                'val_15' => true,
+                'val_16' => true,
+                'val_22' => true,
+                'val_23' => true,
+                'val_24' => true,
+                'val_25' => true,
+                'val_26' => true,
+                'val_27' => true,
+                'val_28' => true,
+                'val_29' => true,
+                'val_30' => true,
+                'val_31' => true,
             ]
         ]);
     }

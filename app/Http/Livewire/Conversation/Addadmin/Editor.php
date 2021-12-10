@@ -12,15 +12,18 @@ use App\Models\conversation;
 use Illuminate\Foundation\Bus\PendingDispatch;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Editor extends Component
 {
+    use LivewireAlert;
+
     public $gamenick;
     public $social;
     public $realname;
     public $about;
     public $leaderships;
-    public $type = 1;
+    public $type = 0;
 
     protected $rules = [
         'gamenick'      => 'required|min:3|max:24|string',
@@ -80,6 +83,15 @@ class Editor extends Component
         $convers = $conversation->createConversation($this->type, $this->social, $this->gamenick, $this->about, $this->realname, $this->leaderships, $uid);
         $conversId = $convers['id'];
         $conversationStats->createConvLog($convers['id'], $convers['nickname']);
+        $this->alert('warning', 'Голосование', [
+            'position' => 'bottom-end',
+            'timer' => 5000,
+            'toast' => true,
+            'showConfirmButton' => true,
+            'onConfirmed' => '',
+            'confirmButtonText' => 'Закрыть',
+            'text' => 'Голосование начало, доступ к нему появится после проверок, обычно 1-2 минуты',
+        ]);
         ReportLog::dispatch($conversId, $this->gamenick);
         Getregdate::dispatch($conversId, $this->gamenick);
         SupportLog::dispatch($conversId, $this->gamenick);

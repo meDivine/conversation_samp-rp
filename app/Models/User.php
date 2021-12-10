@@ -103,4 +103,17 @@ class User extends Authenticatable
         return self::select('vk_id')
             ->where('notify_conversation', true)->get();
     }
+
+    public function updateNotifyState(bool $war, bool $convers) {
+        return self::find(Auth::id())->update([
+            'capture_info' => $war,
+            'notify_conversation' => $convers
+        ]);
+    }
+
+    public function getNotifyState() {
+        return self::select('notify_conversation', 'capture_info')
+            ->where('id', Auth::id())
+            ->first();
+    }
 }

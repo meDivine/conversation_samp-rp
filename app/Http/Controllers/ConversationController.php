@@ -29,8 +29,8 @@ class ConversationController extends Controller
             print_r(array_keys($key))."<br>";
         }
         echo "</pre>";*/
-        $frac = new ipApi("8.8.8.8");
-        return $frac->getIpInfo();
+        $frac = new User();
+        return config('services.vkontakte.group');
     }
 
     private function getConvers($id) {
