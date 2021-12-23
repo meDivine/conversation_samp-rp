@@ -26,12 +26,8 @@ class CreateOrchidRoleUsersTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
-        \App\Models\User::find(1)->update([
-            'permissions' => json_encode(
-                ['platform.systems.roles' => true, 'platform.systems.users' => true, 'platform.systems.attachment' => true]
-            )
-        ]);
     }
+
     /**
      * Reverse the migrations.
      */

@@ -90,7 +90,7 @@ class Editor extends Component
             'showConfirmButton' => true,
             'onConfirmed' => '',
             'confirmButtonText' => 'Закрыть',
-            'text' => 'Голосование начало, доступ к нему появится после проверок, обычно 1-2 минуты',
+            'text' => 'Голосование начато, доступ к нему появится после проверок, обычно 1-2 минуты',
         ]);
         ReportLog::dispatch($conversId, $this->gamenick);
         Getregdate::dispatch($conversId, $this->gamenick);

@@ -18,6 +18,8 @@ class PlatformProvider extends OrchidServiceProvider
     public function boot(Dashboard $dashboard): void
     {
         parent::boot($dashboard);
+
+        // ...
     }
 
     /**
@@ -80,6 +82,12 @@ class PlatformProvider extends OrchidServiceProvider
                 ->badge(function () {
                     return Dashboard::version();
                 }, Color::DARK()),
+
+            Menu::make("Выдвижения")
+                ->icon('user-follow')
+                ->route('platform.conversation.general')
+                ->permission('watch_convers')
+                ->title("Действия"),
 
             Menu::make(__('Users'))
                 ->icon('user')
