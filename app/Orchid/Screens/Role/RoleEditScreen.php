@@ -23,6 +23,9 @@ class RoleEditScreen extends Screen
      * @var string
      */
     public $name = 'Manage roles';
+    public $permission = [
+        'make_perm'
+    ];
 
     /**
      * Display header description.
@@ -34,7 +37,6 @@ class RoleEditScreen extends Screen
     /**
      * @var string
      */
-    public $permission = 'platform.systems.roles';
 
     /**
      * @var bool

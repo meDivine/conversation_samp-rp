@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'can_conv' => ConvAccess::class,
+        'access' => \Orchid\Platform\Http\Middleware\Access::class,
     ];
 }

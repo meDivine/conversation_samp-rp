@@ -24,12 +24,12 @@ class RoleListScreen extends Screen
      *
      * @var string
      */
-    public $description = 'Access rights';
+    public $description = 'Права доступа';
 
     /**
      * @var string
      */
-    public $permission = 'platform.systems.roles';
+    public $permission = 'make_perm';
 
     /**
      * Query data.

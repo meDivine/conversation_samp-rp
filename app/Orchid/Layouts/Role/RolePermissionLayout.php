@@ -19,6 +19,7 @@ class RolePermissionLayout extends Rows
      */
     private $user;
 
+
     /**
      * Views.
      *

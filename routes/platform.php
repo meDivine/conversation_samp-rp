@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Conversation\Edit;
 use App\Orchid\Screens\Conversation\General;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
@@ -114,6 +115,10 @@ Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.exam
 Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
 Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
-Route::screen('conversations', General::class)->name('platform.conversation.general');
+Route::screen('conversations', General::class)
+    ->name('platform.conversation.general');
+
+Route::screen('conversation/{conv}', Edit::class)
+    ->name('platform.systems.conversation.edit');
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');

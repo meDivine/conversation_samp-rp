@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Orchid\Screen\AsSource;
 
+/**
+ * @method static find(conversation $conv)
+ */
 class conversation extends Model
 {
     use HasFactory;
@@ -91,6 +94,10 @@ class conversation extends Model
      */
     public function profile(): HasOne {
         return $this->hasOne(User::class, 'id', 'who_start');
+    }
+
+    public function closeInfo(): HasOne {
+        return $this->hasOne(User::class, 'id', 'who_close');
     }
 
     /*

@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Layouts\Conversation;
 
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
@@ -54,6 +55,12 @@ class TableConversationClosed extends Table
                 ->render(function ($date) {
                     return $date->updated_at->format("d/m/y h:i:s");
                 }),
+            TD::make('open', 'Управление')
+                ->render(function ($open) {
+                    return Link::make('Ред.')
+                        ->icon('open');
+                    //->route('platform.idea');
+                })
         ];
     }
 }

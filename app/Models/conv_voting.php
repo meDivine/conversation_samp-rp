@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Auth;
+use Orchid\Screen\AsSource;
 
 class conv_voting extends Model
 {
     use HasFactory;
+    use AsSource;
 
     protected $fillable = [
         'user_id',
@@ -44,5 +47,9 @@ class conv_voting extends Model
             ->whereNotNull('conv_id')
             ->WhereNotNull('user_id')
             ->first();
+    }
+
+    public function profile(): HasOne {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }
