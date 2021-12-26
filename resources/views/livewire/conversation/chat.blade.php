@@ -19,11 +19,6 @@
             <div class="chat-content">
                 <div class="chat chat-left" wire:init="renderChatMessages">
                     <div class="chat-body" wire:poll.keep-alive="renderChatMessages">
-                        <div wire:loading="renderChatMessages" wire:target="renderChatMessages">
-                            <div style="text-align: center;">
-                                <img src="{{asset('assets/img/ObviousSoupyArthropods-size_restricted.gif')}}" height="320px" width="320px" alt="">
-                            </div>
-                        </div>
                         @foreach($chatMess as $key)
                             <div class="chat-message">
                                 <div class="avatar me-3">
