@@ -39,6 +39,6 @@ Route::get('/oauth/vk', [VkontakteAuth::class, 'redirect']);
 Route::get('/oauth/vk/callback', [VkontakteAuth::class, 'callback']);
 //Route::get('/test', [ConversationController::class, 'parse']);
 Route::get('/c/{id}', [ConversationController::class, 'index'])->name('adminconv')->middleware(['auth', 'access:can_conv']);
-Route::get('/t', [VkontakteAuth::class, 'test']);
+//Route::get('/t', [VkontakteAuth::class, 'test']);
 Route::get('/logs', [LogsController::class, 'index'])->name('logs')->middleware(['auth', 'access:can_conv']);
 
