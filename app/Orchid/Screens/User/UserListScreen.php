@@ -33,7 +33,7 @@ class UserListScreen extends Screen
     /**
      * @var string
      */
-    public $permission = 'platform.systems.users';
+    public $permission = 'make_perm';
 
     /**
      * Query data.
