@@ -232,7 +232,7 @@ class Logs
         $logsTableResponse = new LogsTableResponse(
             "kickban",
             $this->nicknameOne,
-            $this->nicknameTwo,
+            null,
             $this->dateStart,
             $this->dateEnd,
             "Player",

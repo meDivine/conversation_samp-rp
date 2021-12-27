@@ -57,7 +57,7 @@ class Form extends Component
     private function setSecondNickHidden(): bool
     {
         return match ($this->type) {
-            "capture_search", "names_search", "warehouses_search" => true,
+            "capture_search", "names_search", "warehouses_search", "punishments_search" => true,
             default => false,
         };
     }
