@@ -41,6 +41,11 @@ class Form extends Component
         $this->emit('getLogs', $result);
     }
 
+    public function boot() {
+        $this->dateStart = Carbon::tomorrow()->format("d.m.Y");
+        $this->dateEnd = Carbon::now()->format("d.m.Y");
+    }
+
 
     /**
      * Сравним тип лога, и уберем лишние даннные с формы
@@ -110,7 +115,9 @@ class Form extends Component
             'stateDateState' => $this->setStartDateHidden(),
             'endDateState' => $this->setEndDateHidden(),
             'getFirstNameText' => $this->getFirstName(),
-            'getSecondNameText' => $this->getSecondName()
+            'getSecondNameText' => $this->getSecondName(),
+            'dateStartValue' => $this->dateStart,
+            'dateEndValue' => $this->dateEnd
         ]);
     }
 }

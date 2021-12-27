@@ -28,14 +28,14 @@
                             </div>
                             <div class="col-md-8 form-group" @if($stateDateState) hidden @endif>
                                 <input type="date" wire:model="dateStart" class="form-control"
-                                       placeholder="">
+                                       value="{{ $dateStartValue }}" placeholder="{{ $dateStartValue }}">
                             </div>
                             <div class="col-md-4" @if($endDateState) hidden @endif>
                                 <label>Дата окончания</label>
                             </div>
                             <div class="col-md-8 form-group" @if($endDateState) hidden @endif>
                                 <input type="date" wire:model.lazy="dateEnd" class="form-control"
-                                       placeholder="data">
+                                       value="{{ $dateEndValue }}">
                             </div>
                             <div class="col-sm-12 d-flex justify-content-end">
                                 <button type="submit" wire:loading.remove wire:target="getInfo"
