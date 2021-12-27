@@ -3,10 +3,14 @@
 namespace App\Http\Livewire\Admin\Conv;
 
 use App\Models\conv_voting;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class VoteForm extends Component
 {
+
+    use LivewireAlert;
+
     public $conv_id;
     public $agree = false;
     public $disagree = false;
@@ -42,6 +46,14 @@ class VoteForm extends Component
     public function addVote () {
         $this->validate();
         $convVoting = new conv_voting();
+
+        $this->alert('success', 'Успешно', [
+            'position' => 'bottom-end',
+            'timer' => 3000,
+            'toast' => true,
+            'text' => 'Голос успешно отправлен',
+        ]);
+
         return $convVoting->addVote($this->conv_id, $this->comment,
             $this->agree, $this->disagree, $this->neutral);
     }
