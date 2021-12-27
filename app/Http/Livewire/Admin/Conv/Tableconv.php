@@ -17,7 +17,7 @@ class Tableconv extends Component
     {
         $all = conversation::whereNull('who_close')
             ->latest()
-            ->simplePaginate(10);
+            ->paginate(10);
         return view('livewire.admin.conv.tableconv', compact('all'));
     }
 }
