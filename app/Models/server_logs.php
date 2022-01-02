@@ -32,13 +32,13 @@ class server_logs extends Model
         $ipinfo = $this->getipInfo(Request::ip()) ?? "n/a";
         return self::create([
             'action' => $act,
-            'city' => $ipinfo['city'],
+            'city' => $ipinfo['city'] ?? "n/a",
             'ip' => Request::ip(),
-            'country' => $ipinfo['country'],
+            'country' => $ipinfo['country'] ?? "n/a",
             'nick' => Auth::user()->nickname,
             'userid' => Auth::id(),
-            'vpn' => 'proxy',
-            'region' => $ipinfo['regionName']
+            'vpn' => 'proxy' ?? "n/a",
+            'region' => $ipinfo['regionName'] ?? "n/a"
         ]);
     }
 }
