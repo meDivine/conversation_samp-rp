@@ -30,7 +30,7 @@ Route::get('/add', function () {
 
 Route::get('/logout', function () {
     Auth::logout();
-});
+})->name('logout');
 
 Route::get('/settings', function () {
     return view('components.settings.settings');

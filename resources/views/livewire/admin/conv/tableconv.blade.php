@@ -6,7 +6,7 @@
             </div>
             <div class="card-content">
                 <div class="card-body">
-                    <p class="card-text">Голосовать обязаны все без исключения. <code>Инициатора голосования видны
+                    <p class="card-text">Голосовать обязаны все без исключения. <code>Инициатора голосования видно
                             6+</code>
                     </p>
                     <!-- Table with outer spacing -->

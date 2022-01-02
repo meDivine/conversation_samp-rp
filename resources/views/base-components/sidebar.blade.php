@@ -54,5 +54,19 @@
                 <span>Настройки</span>
             </a>
         </li>
+        @if(Auth::user()->hasAccess("watch_convers"))
+            <li class="sidebar-item  ">
+                <a href="/admin" class='sidebar-link'>
+                    <i class="bi bi-gem"></i>
+                    <span>Адм. Панель</span>
+                </a>
+            </li>
+        @endif
+        <li class="sidebar-item  ">
+            <a href="{{ route('logout') }}" class='sidebar-link'>
+                <i class="bi bi-door-open-fill"></i>
+                <span>Выход</span>
+            </a>
+        </li>
     </ul>
 </div>
