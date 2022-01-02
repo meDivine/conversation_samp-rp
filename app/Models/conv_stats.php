@@ -35,11 +35,11 @@ class conv_stats extends Model
         return self::create([
             'conv_id' => $conv_id,
             'nick' => $nick,
-            'warns' => json_encode('Пусто', JSON_UNESCAPED_UNICODE),
-            'bans' => json_encode('Пусто', JSON_UNESCAPED_UNICODE),
-            'kicks' => json_encode('Пусто',JSON_UNESCAPED_UNICODE),
-            'report_log' => json_encode('Пусто', JSON_UNESCAPED_UNICODE),
-            'support_log' => json_encode('Пусто', JSON_UNESCAPED_UNICODE),
+            'warns' => [],
+            'bans' => [],
+            'kicks' => [],
+            'report_log' => [],
+            'support_log' => [],
         ]);
     }
 
