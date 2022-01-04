@@ -3,7 +3,7 @@
     @include('components.homepage.header')
 @endsection
 @section('title')
-    <title>Тест тайтл</title>
+    <title>ZEROTWO</title>
 @endsection
 @section('content')
     @livewire('admin.conv.tableconv')
