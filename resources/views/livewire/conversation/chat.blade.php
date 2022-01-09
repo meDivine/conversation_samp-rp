@@ -25,7 +25,7 @@
                                     <img src="{{ $key->userInfo->avatar ?? "https://shutnikov.club/wp-content/uploads/2020/01/58cc02673ad2915adce96349.jpg" }}" alt="" srcset="">
                                 </div>
 
-                                <span style="color: #eeff0f">{{$key->created_at->format('H:i d.m.y')}} {{ $key->userInfo->nickname }} ({{ $key->userInfo->name }})</span>
+                                <span style="color: #eeff0f">{{$key->created_at->format('H:i d.m.y')}} {{ $key->userInfo->nickname ?? "noname" }} ({{ $key->userInfo->name ?? "noname" }})</span>
                                 <br>
                                 {{ $key->message }}
                             </div>
