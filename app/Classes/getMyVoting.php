@@ -14,6 +14,6 @@ class getMyVoting
      */
     public static function getMyVote($vote) {
         $vote = new conv_voting();
-        return $vote->getVotingInfoByName($vote);
+        return $vote->getMyVotingStat($vote);
     }
 }

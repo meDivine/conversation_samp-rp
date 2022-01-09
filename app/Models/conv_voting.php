@@ -58,7 +58,7 @@ class conv_voting extends Model
      * @param $vodeId
      * @return string|void
      */
-    public static function getMyVotingStat($vodeId) {
+    public function getMyVotingStat($vodeId) {
         $voteInfo = self::where('conv_id', $vodeId)
             ->where('user_id', Auth::id())
             ->first();
