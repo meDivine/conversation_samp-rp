@@ -29,7 +29,7 @@
                             @foreach ($all as $key)
                                 <tr>
                                     <td class="text-bold-500">{{ $key->nickname }}</td>
-                                    <td class="text-bold-500">{{ \App\Classes\getMyVoting::getMyVote($key->id) }}</td>
+                                    <td class="text-bold-500">{{ \App\Models\conv_voting::getMyVotingStat($key->id)}}</td>
                                     <td>{{ $key->type}}</td>
                                     <td class="text-bold-500">{{ $key->created_at->diffForHumans() }}</td>
                                     @if(Auth::user()->hasAccess("watch_convers"))

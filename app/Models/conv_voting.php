@@ -55,10 +55,12 @@ class conv_voting extends Model
 
     /**
      * Преобразуем тип голоса в смайлик
+     * Мега костыль, исправлю как наберусь опыта :3
+     * TODO исправить костыль
      * @param $vodeId
      * @return string|void
      */
-    public function getMyVotingStat($vodeId) {
+    public static function getMyVotingStat($vodeId) {
         $voteInfo = self::where('conv_id', $vodeId)
             ->where('user_id', Auth::id())
             ->first();
