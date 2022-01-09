@@ -30,7 +30,7 @@ class ConversationController extends Controller
         }
         echo "</pre>";*/
         $frac = new User();
-        return config('services.vkontakte.group');
+        return $frac->getEnabledNotifyVK();
     }
 
     private function getConvers($id) {

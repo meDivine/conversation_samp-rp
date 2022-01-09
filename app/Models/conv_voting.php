@@ -52,4 +52,22 @@ class conv_voting extends Model
     public function profile(): HasOne {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    /**
+     * Преобразуем тип голоса в смайлик
+     * @param $vodeId
+     * @return string|void
+     */
+    public static function getMyVotingStat($vodeId) {
+        $voteInfo = self::where('conv_id', $vodeId)
+            ->where('user_id', Auth::id())
+            ->first();
+        // \xF0\x9F\x91\x8D like
+        // \xF0\x9F\x91\x8E dislike
+
+        if (empty($voteInfo)) return "";
+        else if ($voteInfo->agree) return "\xF0\x9F\x98\x8D";
+        else if ($voteInfo->disagree) return "\xF0\x9F\x98\x8D";
+        else if ($voteInfo->neutral) return "\xF0\x9F\x98\x91";
+    }
 }
