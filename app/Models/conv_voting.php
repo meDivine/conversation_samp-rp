@@ -69,7 +69,7 @@ class conv_voting extends Model
 
         if (empty($voteInfo)) return "";
         else if ($voteInfo->agree) return "\xF0\x9F\x98\x8D";
-        else if ($voteInfo->disagree) return "\xF0\x9F\x98\xA1";
+        else if ($voteInfo->disagree) return "\xF0\x9F\x92\xA9";
         else if ($voteInfo->neutral) return "\xF0\x9F\x98\x91";
     }
 }
