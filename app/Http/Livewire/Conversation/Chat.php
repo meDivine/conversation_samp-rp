@@ -26,6 +26,7 @@ class Chat extends Component
         $this->validate();
         $chat = new conv_discussion();
         $chat->addMessage($this->mess, $this->conv_id);
+        $this->mess = "";
     }
 
     public function renderChatMessages() {
