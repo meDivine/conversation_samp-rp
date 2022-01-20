@@ -21,7 +21,7 @@ class Table extends Component
     }
 
     private function info() {
-        $this->alert('info', '404', [
+        $this->alert('info', 'Логи не найдены', [
             'position' => 'bottom-end',
             'timer' => 3000,
             'toast' => true,
