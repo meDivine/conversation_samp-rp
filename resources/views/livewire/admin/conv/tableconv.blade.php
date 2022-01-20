@@ -15,7 +15,7 @@
                             <thead>
                             <tr>
                                 <th>Ник</th>
-                                <th>Я</th>
+                                <th>Мой голос</th>
                                 <th>Тип</th>
                                 <th>Дата начала</th>
                                 @if(Auth::user()->hasAccess("watch_convers"))
