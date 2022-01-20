@@ -20,8 +20,8 @@
                                 <th>Дата начала</th>
                                 @if(Auth::user()->hasAccess("watch_convers"))
                                 <th>Кто начал</th>
-                                @endif
                                 <th>Статистика</th>
+                                @endif
                                 <th>Действие</th>
                             </tr>
                             </thead>
@@ -39,9 +39,10 @@
                                         </div>
                                         <a class="font-bold ms-3 mb-0">{{ $key->profile->name }}
                                             ({{ $key->profile->nickname }})</a></td>
-                                    @endif
+
                                     <td class="text-bold-500"><span style="color: #47a76a">{{ $key->convVote->sum('agree') }}</span> / <span style="color: #CB4154">{{ $key->convVote->sum('disagree') }}</span>
                                         / <span style="color: #B5B8B1;">{{ $key->convVote->sum('neutral') }}</span></td>
+                                    @endif
                                     <td><a href="{{ route('adminconv', ['id' => $key->id]) }}" class="btn btn-primary">Перейти</a></td>
                                 </tr>
                             @endforeach
