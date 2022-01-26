@@ -214,10 +214,10 @@ class Logs
                 'Сервер' => trim($cols[2]->nodeValue ?? null, "[]"),
                 'Игрок' => trim($cols[3]->nodeValue ?? null, "[]"),
                 'IP Игрока' => $ip,
-                'Страна' => $ipapi->getCountryFlag($ipInfo->country_code) . $ipInfo->country_name,
-                'Регион' => $ipInfo->region,
-                'Город' => $ipInfo->region,
-                'Провайдер' => $ipInfo->org
+                'Страна' => $ipapi->getCountryFlag($ipInfo->country_code ?? "ru") . $ipInfo->country_name ?? "n/a",
+                'Регион' => $ipInfo->region ?? "n/a",
+                'Город' => $ipInfo->region ?? "n/a",
+                'Провайдер' => $ipInfo->org ?? "n/a"
             ];
             $ipLog[] = $ipAuthTemplate;
         }
