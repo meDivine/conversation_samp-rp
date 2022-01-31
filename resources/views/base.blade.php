@@ -24,8 +24,8 @@
         <div class="sidebar-wrapper active">
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
-                    <div class="logo">
-                        <a href="{{ route('home') }}"><img src="{{ asset('assets/img/pavel.jpg') }}" width="200px" height="400px" alt="Logo" srcset=""></a>
+                    <div>
+                        <a href="{{ route('home') }}"><img src="{{ asset('assets/img/pavel.jpg') }}" alt="Logo" srcset=""></a>
                     </div>
                     <div class="toggler">
                         <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
