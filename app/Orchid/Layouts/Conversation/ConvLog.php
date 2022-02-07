@@ -29,15 +29,15 @@ class ConvLog extends Table
      */
     protected function columns(): array
     {
-        return array(
+        return [
             TD::make('profile.name', 'Имя')
                 ->render(function ($id) {
-                    return $id->profile->name;
+                    return $id->profile->name ?? "DELETED";
                 }),
 
             TD::make('profile.nickname', 'Ник')
                 ->render(function ($id) {
-                    return $id->profile->nickname;
+                    return $id->profile->nickname ?? "DELETED";
                 }),
 
             TD::make('type', 'Решение')
@@ -60,6 +60,6 @@ class ConvLog extends Table
                 }),
 
             TD::make('id', 'id')
-        );
+        ];
     }
 }
