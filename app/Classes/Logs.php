@@ -274,6 +274,8 @@ class Logs
                 return $this->getIpAuth();
             case "warehouses_search":
                 return $this->getWarehouses();
+            case "fraction_search":
+                return $this->getFractions();
         }
     }
 }
