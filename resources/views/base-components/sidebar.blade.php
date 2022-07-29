@@ -28,6 +28,13 @@
             </a>
         </li>
 
+        <li class="sidebar-item">
+            <a href="{{ route('time') }}" class='sidebar-link'>
+                <i class="bi bi-hourglass-split"></i>
+                <span>Время в игре</span>
+            </a>
+        </li>
+
         <li class="sidebar-title">Остальное</li>
 
 
@@ -41,7 +48,7 @@
                     <a href="auth-login.html">Программное обеспечение</a>
                 </li>
                 <li class="submenu-item ">
-                    <a href="auth-register.html">Плагины/скрипты</a>
+                    <a href="{{ route('scripts') }}">Плагины/скрипты</a>
                 </li>
                 <li class="submenu-item ">
                     <a href="auth-forgot-password.html">Полезные темки</a>
