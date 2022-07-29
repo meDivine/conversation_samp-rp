@@ -1,5 +1,7 @@
 <?php
 
+use Orchid\IconPack\Path;
+
 return [
 
     /*
@@ -156,7 +158,9 @@ return [
     | Example: [ 'fa' => storage_path('app/fontawesome') ]
     */
 
-    'icons' => [],
+    'icons' => [
+        'orc' => Path::getFolder(),
+    ],
 
     /*
     |--------------------------------------------------------------------------
