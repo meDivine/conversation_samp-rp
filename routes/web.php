@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\Files\FileController;
 use App\Http\Controllers\LogsController;
+use App\Http\Controllers\TimeController;
 use App\Http\Controllers\VkontakteAuth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('login');
+})->middleware(['guest'])->name('login');
 
 Route::get('/panel', function () {
     return view('components.homepage.home');
@@ -39,6 +41,9 @@ Route::get('/oauth/vk', [VkontakteAuth::class, 'redirect']);
 Route::get('/oauth/vk/callback', [VkontakteAuth::class, 'callback']);
 //Route::get('/test', [ConversationController::class, 'parse']);
 Route::get('/c/{id}', [ConversationController::class, 'index'])->name('adminconv')->middleware(['auth', 'access:can_conv']);
-//Route::get('/t', [VkontakteAuth::class, 'test']);
+Route::get('/t', [VkontakteAuth::class, 'test']);
 Route::get('/logs', [LogsController::class, 'index'])->name('logs')->middleware(['auth', 'access:can_conv']);
+Route::get('/time', [TimeController::class, 'index'])->name('time')->middleware(['auth']);
+Route::get('/files/plugins', [FileController::class, 'scripts'])->name('scripts');
+Route::get('/files/plugins/add', [FileController::class, 'scriptsAdd'])->name('scriptsAdd');
 
