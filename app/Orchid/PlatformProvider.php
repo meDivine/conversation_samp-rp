@@ -89,6 +89,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('watch_convers')
                 ->title("Действия"),
 
+            Menu::make("Игровое время")
+                ->icon('user-follow')
+                ->route('platform.time')
+                ->permission('game_time'),
+
             Menu::make(__('Users'))
                 ->icon('user')
                 ->route('platform.systems.users')
@@ -131,7 +136,8 @@ class PlatformProvider extends OrchidServiceProvider
             ItemPermission::group('Модерирование')
                 ->addPermission('watch_convers', 'Просмотр голосований')
                 ->addPermission('close_convers', 'Закрывать голосования')
-                ->addPermission('watch_user_logs', 'Логи'),
+                ->addPermission('watch_user_logs', 'Логи')
+                ->addPermission('game_time', 'Игровое время'),
             //пользователь
             ItemPermission::group('Пользователь')
                 ->addPermission('can_conv', 'Может голосовать')
