@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/toast.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     @livewireStyles
 </head>
 
@@ -71,9 +72,13 @@
 <script src="{{asset('assets/js/bootstrap-bundle.min.js')}}"></script>
 <script src="{{asset('assets/js/main.min.js')}}"></script>
 <script src="{{asset('assets/js/choices.min.js')}}"></script>
-<script src="{{asset('assets/js/toast.min.js')}}"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<x-livewire-alert::scripts />
+<script src="{{ asset('assets/js/toast.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+
+@stack('scr')
+
+<x-livewire-alert::scripts/>
+
 @livewireScripts
 </body>
 </html>
