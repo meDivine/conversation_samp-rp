@@ -22,4 +22,14 @@ class LogsTableManipulate
         $tables = $dom->getElementsByTagName('table');
         return $tables->item(0)->getElementsByTagName('tr');
     }
+
+    public function tableAdmTime()
+    {
+        $tablePos = $this->table;
+        $dom = new domDocument();
+        $dom->loadHTML("\xEF\xBB\xBF" . $tablePos, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->preserveWhiteSpace = false;
+        $tables = $dom->getElementsByTagName('table');
+        return $tables->item(0)->getElementsByTagName('tr');
+    }
 }
