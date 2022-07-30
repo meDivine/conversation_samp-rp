@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('header')
-    @include('components.settings.header')
+    @include('components.time.header')
 @endsection
 @section('title')
     <title>Учёт игрового времени</title>
