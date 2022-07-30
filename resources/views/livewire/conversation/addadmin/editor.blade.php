@@ -61,7 +61,7 @@
                                             <input wire:model.lazy="forum" type="text" class="form-control"
                                                     id="email-id-icon">
                                             <div class="form-control-icon">
-                                                <i class="bi bi-envelope"></i>
+                                                <i class="bi bi-collection"></i>
                                             </div>
                                         </div>
                                         @error('forum')
