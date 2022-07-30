@@ -2,15 +2,13 @@
     <div class="form-body">
         <div class="row">
             <fieldset class="form-group">
-                <select class="form-select" id="basicSelect">
-                    <option>IT</option>
-                    <option>Blade Runner</option>
-                    <option>Thor Ragnarok</option>
+                <select class="form-select" id="basicSelect" wire:model="date">
+                    <option value="0" selected>Выбери неделю</option>
+                    @foreach($weeks as $key)
+                        <option value="{{ $key->id }}">#{{ $key->id }} | {{ $key->week_name }}</option>
+                    @endforeach
                 </select>
             </fieldset>
-            <div class="col-12 d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary me-1 mb-1">Применить</button>
-            </div>
         </div>
     </div>
 </form>
