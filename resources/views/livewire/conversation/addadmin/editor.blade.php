@@ -56,6 +56,21 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group has-icon-left">
+                                        <label for="email-id-icon">Ссылка на формный аккаунт</label>
+                                        <div class="position-relative">
+                                            <input wire:model.lazy="forum" type="text" class="form-control"
+                                                    id="email-id-icon">
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-envelope"></i>
+                                            </div>
+                                        </div>
+                                        @error('forum')
+                                        {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group has-icon-left">
                                         <label for="first-name-icon">Реальное имя</label>
                                         <div class="position-relative">
                                             <input wire:model.lazy="realname" type="text" class="form-control"

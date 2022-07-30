@@ -28,7 +28,8 @@ class conversation extends Model
         'agree',
         'disagree',
         'neutral',
-        'who_close'
+        'who_close',
+        'forum'
     ];
 
     /*
@@ -49,7 +50,7 @@ class conversation extends Model
      */
     public function createConversation(int $type, string $social, string $nickname,
                                        string $about, string $realName, string $leaderships,
-                                       int $whoStart): Model|conversation
+                                       int $whoStart, string $forum)
     {
         return self::create([
             /*
@@ -86,7 +87,11 @@ class conversation extends Model
             /*
              * Статистика голосования по дефолту нули
              */
-            'who_close' => NULL
+            'who_close' => NULL,
+            /*
+             * Ссылка на форумник
+             */
+            'forum' => $forum
         ]);
     }
 

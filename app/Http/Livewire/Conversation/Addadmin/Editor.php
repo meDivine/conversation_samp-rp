@@ -24,13 +24,15 @@ class Editor extends Component
     public $about;
     public $leaderships;
     public $type = 0;
+    public $forum;
 
     protected $rules = [
         'gamenick'      => 'required|min:3|max:24|string',
         'social'        => 'required|min:3|max:64|url',
         'realname'      => 'required|min:3|max:64|string',
         'about'         => 'required|min:3|max:1000|string',
-        'leaderships'   => 'required|min:2|max:1000|string'
+        'leaderships'   => 'required|min:2|max:1000|string',
+        'forum'         => 'required|url'
     ];
 
     protected $messages = [
@@ -68,7 +70,12 @@ class Editor extends Component
         'leaderships.required'  => 'Лидерства не могут быть пустыми',
         'leaderships.min'       => 'Лидерства не могут быть менее 2 символов',
         'leaderships.max'       => 'Данные о лидерствах не могут быть длинее 1000 символов',
-        'leaderships.string'    => 'Данные о лидерствах должны быть строкой'
+        'leaderships.string'    => 'Данные о лидерствах должны быть строкой',
+        /*
+         * Форумник
+         */
+        'forum.required'        => 'Ссылка на форумник не может быть пустой',
+        'forum.url'             => 'Форумник должен быть ссылкой'
     ];
 
     /*
@@ -80,7 +87,7 @@ class Editor extends Component
         $uid = Auth::id();
         $conversation = new conversation();
         $conversationStats = new conv_stats();
-        $convers = $conversation->createConversation($this->type, $this->social, $this->gamenick, $this->about, $this->realname, $this->leaderships, $uid);
+        $convers = $conversation->createConversation($this->type, $this->social, $this->gamenick, $this->about, $this->realname, $this->leaderships, $uid, $this->forum);
         $conversId = $convers['id'];
         $conversationStats->createConvLog($convers['id'], $convers['nickname']);
         $this->alert('warning', 'Голосование', [

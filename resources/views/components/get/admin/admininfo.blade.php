@@ -68,6 +68,11 @@
                                             <p class="form-control-static" href="{{ $convinfo->social }}"
                                                id="staticInput">{{ $convinfo->social }}</p>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="disabledInput">Ссылка на формуник</label>
+                                            <p class="form-control-static" href="{{ $convinfo->forum }}"
+                                               id="staticInput">{{ $convinfo->forum }}</p>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
