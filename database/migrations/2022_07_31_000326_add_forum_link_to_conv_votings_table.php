@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('conv_votings', function (Blueprint $table) {
-            $table->string('forum_link', 256)->after('comment');
+        Schema::table('conversation', function (Blueprint $table) {
+            $table->string('forum_link', 256)->after('leaderships');
         });
     }
 
