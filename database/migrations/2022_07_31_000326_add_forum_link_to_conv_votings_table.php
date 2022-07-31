@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('conversation', function (Blueprint $table) {
+        Schema::table('conversations', function (Blueprint $table) {
             $table->string('forum_link', 256)->after('leaderships');
         });
     }
