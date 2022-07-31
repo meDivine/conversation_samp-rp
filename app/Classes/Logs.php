@@ -207,8 +207,8 @@ class Logs
         foreach ($rows as $row) {
             $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
             $ip = trim($cols[4]->nodeValue ?? null, "[]");
-            $ipapi = new ipApi($ip);
-            $ipInfo = json_decode($ipapi->getIpInfo());
+            //$ipapi = new ipApi($ip);
+            //$ipInfo = json_decode($ipapi->getIpInfo());
             $ipAuthTemplate = [
                 'Дата/время' => trim($cols[1]->nodeValue ?? null, "[]"),
                 'Сервер' => trim($cols[2]->nodeValue ?? null, "[]"),
