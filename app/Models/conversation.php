@@ -91,7 +91,7 @@ class conversation extends Model
             /*
              * Ссылка на форумник
              */
-            'forum' => $forum
+            'forum_link' => $forum
         ]);
     }
 
