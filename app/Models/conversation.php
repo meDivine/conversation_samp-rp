@@ -29,7 +29,7 @@ class conversation extends Model
         'disagree',
         'neutral',
         'who_close',
-        'forum'
+        'forum_link'
     ];
 
     /*
