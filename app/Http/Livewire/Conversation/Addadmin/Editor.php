@@ -81,7 +81,7 @@ class Editor extends Component
     /*
      * Пока синхронно
      */
-    public function addConversation(): PendingDispatch
+    public function addConversation()
     {
         $this->validate();
         $uid = Auth::id();
@@ -103,7 +103,8 @@ class Editor extends Component
         Getregdate::dispatch($conversId, $this->gamenick);
         SupportLog::dispatch($conversId, $this->gamenick);
         ConversationSend::dispatch($conversId, $this->gamenick);
-        return getpunish::dispatch($conversId, $this->gamenick);
+        getpunish::dispatch($conversId, $this->gamenick);
+        return redirect(route('home'));
     }
 
 
