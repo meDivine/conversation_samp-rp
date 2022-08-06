@@ -96,12 +96,16 @@ class User extends Authenticatable
 
     public function getEnabledNotifyVK(): Collection {
         return self::select('vk_id')
-            ->where('capture_info', true)->get();
+            ->where('capture_info', true)
+            ->hasAccess('can_conv')
+            ->get();
     }
 
     public function getEnabledNotifyConversation(): Collection {
         return self::select('vk_id')
-            ->where('notify_conversation', true)->get();
+            ->where('notify_conversation', true)
+            ->hasAccess('can_conv')
+            ->get();
     }
 
     public function updateNotifyState(bool $war, bool $convers) {
