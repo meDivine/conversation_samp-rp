@@ -3,6 +3,9 @@
 namespace App\Http\Livewire\Admin\Conv;
 
 use App\Models\conv_voting;
+use App\Models\conversation;
+use App\Models\server_logs;
+use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -69,6 +72,19 @@ class VoteForm extends Component
         $this->agree = $voteInfo->agree ?? false;
         $this->disagree = $voteInfo->disagree ?? false;
         $this->neutral = $voteInfo->neutral ?? false;
+    }
+
+    public function closeConv() {
+        $serverLog = new server_logs();
+        $serverLog->addLog("Закрыл голосование $this->conv->id");
+        conversation::find($this->conv_id)
+            ->update(['who_close' => Auth::id()]);
+        $this->alert('success', 'Успешно', [
+            'position' => 'bottom-end',
+            'timer' => 3000,
+            'toast' => true,
+            'text' => 'Голосование закрыто',
+        ]);
     }
 
     public function render()
