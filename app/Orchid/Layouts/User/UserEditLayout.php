@@ -26,7 +26,6 @@ class UserEditLayout extends Rows
 
             Input::make('user.email')
                 ->type('email')
-                ->required()
                 ->title("Почта"),
 
             Input::make('user.nickname')
