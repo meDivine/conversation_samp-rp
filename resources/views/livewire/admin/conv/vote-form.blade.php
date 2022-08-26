@@ -55,7 +55,7 @@
                name="fname" wire:model="comment" placeholder="Видно тебе и ГА">
     </div>
     <button type="submit" class="btn btn-primary me-1 mb-1">Отправить</button>
-    @hasAccess('make_perm')
+    @if(\Auth::user()->inRole("lord"))
     <button wire:click="closeConv" class="btn btn-danger me-1 mb-1">Закрыть</button>
-    @endhasAccess
+    @endif
 </form>
