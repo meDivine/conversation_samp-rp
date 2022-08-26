@@ -70,8 +70,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="disabledInput">Ссылка на формуник</label>
-                                            <p class="form-control-static" href="{{ $convinfo->forum }}"
-                                               id="staticInput">{{ $convinfo->forum }}</p>
+                                            <p class="form-control-static" href="{{ $convinfo->forum_link }}"
+                                               id="staticInput">{{ $convinfo->forum_link }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
