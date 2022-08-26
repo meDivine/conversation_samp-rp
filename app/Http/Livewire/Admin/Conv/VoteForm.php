@@ -76,7 +76,7 @@ class VoteForm extends Component
 
     public function closeConv() {
         $serverLog = new server_logs();
-        $serverLog->addLog("Закрыл голосование $this->conv->id");
+        $serverLog->addLog("Закрыл голосование $this->conv_id");
         conversation::find($this->conv_id)
             ->update(['who_close' => Auth::id()]);
         $this->alert('success', 'Успешно', [
