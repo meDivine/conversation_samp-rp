@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group has-icon-left">
-                                        <label for="email-id-icon">Ссылка на формный аккаунт</label>
+                                        <label for="email-id-icon">Ссылка на форумный аккаунт</label>
                                         <div class="position-relative">
                                             <input wire:model.lazy="forum" type="text" class="form-control"
                                                     id="email-id-icon">
