@@ -8,12 +8,21 @@
                 <span>Главная</span>
             </a>
         </li>
-        <li class="sidebar-item  ">
+        @if(\Illuminate\Support\Facades\Redis::get('convStat') == 1)
+        <li class="sidebar-item" >
             <a href="{{ route('add') }}" class='sidebar-link'>
                 <i class="bi bi-bar-chart-line-fill"></i>
                 <span>Выдвижение</span>
             </a>
         </li>
+        @else
+            <li class="sidebar-item" >
+                <a class='sidebar-link'>
+                    <i class="bi bi-bar-chart-line-fill"></i>
+                    <span>Выдвижение (отключено)</span>
+                </a>
+            </li>
+        @endif
         <li class="sidebar-item  ">
             <a href="none" class='sidebar-link'>
                 <i class="bi bi-eye-fill"></i>
