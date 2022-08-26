@@ -28,7 +28,7 @@ Route::get('/panel', function () {
 
 Route::get('/add', function () {
     return view('addadmin');
-})->name('add')->middleware(['auth', 'access:can_conv']);
+})->name('add')->middleware(['auth', 'access:can_conv', 'convToggle']);
 
 Route::get('/logout', function () {
     Auth::logout();
