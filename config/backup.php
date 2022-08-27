@@ -81,7 +81,6 @@ return [
              */
             'databases' => [
                 'mysql',
-                'useSingleTransaction' => true,
             ],
         ],
 
