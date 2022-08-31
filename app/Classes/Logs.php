@@ -214,8 +214,8 @@ class Logs
                 'Сервер'        => trim($cols[2]->nodeValue ?? null, "[]"),
                 'Игрок'         => trim($cols[3]->nodeValue ?? null, "[]"),
                 'IP Игрока'     => $ip,
-                'Страна'        => $ipInfo->country ?? "n/a",
-                'Регион'        => $ipInfo->regionName ?? "n/a",
+                'Страна'        => $ipInfo->country_name ?? "n/a",
+                'Регион'        => $ipInfo->state_prov ?? "n/a",
                 'Город'         => $ipInfo->city ?? "n/a",
                 'Провайдер'     => $ipInfo->isp ?? "n/a"
             ];

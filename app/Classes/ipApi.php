@@ -17,7 +17,7 @@ class ipApi
 
     public function getIpInfo(): Response
     {
-        return Http::get("https://ip-api.com/$this->ip/json/");
+        return Http::get("https://api.ipgeolocation.io/ipgeo?apiKey=7744c1ec2234467bb84832f4097b5072&ip=$this->ip");
     }
 
     public function getCountryFlag($counrtyCode): string
