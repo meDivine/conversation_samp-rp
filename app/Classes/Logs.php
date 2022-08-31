@@ -207,17 +207,17 @@ class Logs
         foreach ($rows as $row) {
             $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
             $ip = trim($cols[4]->nodeValue ?? null, "[]");
-            //$ipapi = new ipApi($ip);
-            //$ipInfo = json_decode($ipapi->getIpInfo());
+            $ipapi = new ipApi($ip);
+            $ipInfo = json_decode($ipapi->getIpInfo());
             $ipAuthTemplate = [
                 'Дата/время' => trim($cols[1]->nodeValue ?? null, "[]"),
                 'Сервер' => trim($cols[2]->nodeValue ?? null, "[]"),
                 'Игрок' => trim($cols[3]->nodeValue ?? null, "[]"),
                 'IP Игрока' => $ip,
-                /*'Страна' => $ipapi->getCountryFlag($ipInfo->country_code ?? "ru") . $ipInfo->country_name ?? "n/a",
-                'Регион' => $ipInfo->region ?? "n/a",
-                'Город' => $ipInfo->region ?? "n/a",
-                'Провайдер' => $ipInfo->org ?? "n/a"*/
+                'Страна' => $ipapi->getCountryFlag($ipInfo->countryCode ?? "ru") . $ipInfo->country ?? "n/a",
+                'Регион' => $ipInfo->regionName ?? "n/a",
+                'Город' => $ipInfo->city ?? "n/a",
+                'Провайдер' => $ipInfo->isp ?? "n/a"
             ];
             $ipLog[] = $ipAuthTemplate;
         }

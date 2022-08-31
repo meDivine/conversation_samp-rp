@@ -17,7 +17,7 @@ class ipApi
 
     public function getIpInfo(): Response
     {
-        return Http::get("https://ipapi.co/$this->ip/json/");
+        return Http::get("https://ip-api.com/$this->ip/json/");
     }
 
     public function getCountryFlag($counrtyCode): string
