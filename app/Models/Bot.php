@@ -84,7 +84,7 @@ class Bot extends Model
             ],
             'form_params' => [
                 'time_diapzon_1' => '14.11.2021',
-                'time_diapzon_2' => '17.11.2021',
+                'time_diapzon_2' => Carbon::now()->format('d.m.Y'),
             ]
         ]);
         $tableObject = $discounts->getBody()->getContents();
@@ -131,7 +131,7 @@ class Bot extends Model
                 'Player' => $nick,
                 'Admin' => '',
                 'time_diapzon_1' => '01.01.2015',
-                'time_diapzon_2' => '17.11.2021',
+                'time_diapzon_2' => Carbon::now()->format('d.m.Y'),
             ]
         ]);
         $rows = $this->getRows($getrow); //
@@ -225,7 +225,7 @@ class Bot extends Model
                 'Player' => $nick,
                 'Promocode' => '',
                 'time_diapzon_1' => '01.01.2011',
-                'time_diapzon_2' => '17.11.2021',
+                'time_diapzon_2' => Carbon::now()->format('d.m.Y'),
             ]
         ]);
         //
@@ -261,7 +261,7 @@ class Bot extends Model
                     'Sender' => $nick,
                     'Recipient' => '',
                     'time_diapzon_1' => '01.01.2011',
-                    'time_diapzon_2' => '17.11.2021',
+                    'time_diapzon_2' => Carbon::now()->format('d.m.Y'),
                 ]
             ]);
         } catch (GuzzleException $e) {
@@ -283,7 +283,7 @@ class Bot extends Model
                     'Sender' => $nick,
                     'Recipient' => '',
                     'time_diapzon_1' => '01.01.2011',
-                    'time_diapzon_2' => '17.11.2021',
+                    'time_diapzon_2' => Carbon::now()->format('d.m.Y'),
                 ]
             ]);
         } catch (GuzzleException $e) {
