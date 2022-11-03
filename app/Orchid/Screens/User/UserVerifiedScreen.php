@@ -45,7 +45,7 @@ class UserVerifiedScreen extends Screen
         return [
             'users' => User::with('roles')
                 ->filters()
-                ->hasAnyAccess(['watch_convers', 'can_conv', 'make_perm'])
+                ->inRole('lord')
                 ->filtersApplySelection(UserFiltersLayout::class)
                 ->defaultSort('id', 'desc')
                 ->paginate(),
