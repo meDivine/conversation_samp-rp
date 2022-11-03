@@ -122,7 +122,7 @@ Route::screen('conversations', General::class)
 Route::screen('conversation/{conv}', Edit::class)
     ->name('platform.systems.conversation.edit');
 
-Route::screen('conversation/{conv}', UserVerifiedScreen::class)
+Route::screen('user/verified', UserVerifiedScreen::class)
     ->name('platform.user.verified');
 
 Route::screen('time', \App\Orchid\Screens\Time\Add::class)
