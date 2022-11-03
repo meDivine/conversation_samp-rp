@@ -100,6 +100,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('make_perm')
                 ->title(__('Access rights')),
 
+            Menu::make('Администраторы')
+                ->icon('user')
+                ->route('platform.user.verified')
+                ->permission('make_perm'),
+
             Menu::make(__('Roles'))
                 ->icon('lock')
                 ->route('platform.systems.roles')

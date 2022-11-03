@@ -19,6 +19,7 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
+use App\Orchid\Screens\User\UserVerifiedScreen;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,6 +121,9 @@ Route::screen('conversations', General::class)
 
 Route::screen('conversation/{conv}', Edit::class)
     ->name('platform.systems.conversation.edit');
+
+Route::screen('conversation/{conv}', UserVerifiedScreen::class)
+    ->name('platform.user.verified');
 
 Route::screen('time', \App\Orchid\Screens\Time\Add::class)
     ->name('platform.time');
