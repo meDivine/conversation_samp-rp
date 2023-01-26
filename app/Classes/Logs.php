@@ -64,12 +64,12 @@ class Logs
         foreach ($rows as $row) { // пройдемся циклом по таблице
             $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
             $captureStruct = [
-                'Server Time' => trim($cols[1]->nodeValue ?? null, "[]"), // удаляем лишнее
-                'Server' => (int)trim($cols[2]->nodeValue ?? null, "[]"),
-                'Fraction' => $this->renameFractionByID((int)trim($cols[3]->nodeValue ?? 1, "[]")), // поменяем название фракции c ида на имя
-                'Player' => trim($cols[4]->nodeValue ?? null, "[]"),
-                'Property' => (int)trim($cols[5]->nodeValue ?? null, "[]"),
-                'Owner' => $this->renameFractionByID((int)trim($cols[6]->nodeValue ?? 1, "[]")),
+                'Дата / Время' => trim($cols[1]->nodeValue ?? null, "[]"), // удаляем лишнее
+                'Сервер' => (int)trim($cols[2]->nodeValue ?? null, "[]"),
+                'Фракция' => $this->renameFractionByID((int)trim($cols[3]->nodeValue ?? 1, "[]")), // поменяем название фракции c ида на имя
+                'Игрок' => trim($cols[4]->nodeValue ?? null, "[]"),
+                'Значение' => (int)trim($cols[5]->nodeValue ?? null, "[]"),
+                'Владелец' => $this->renameFractionByID((int)trim($cols[6]->nodeValue ?? 1, "[]")),
             ];
             $capture[] = $captureStruct; // заполняем массив
         }
