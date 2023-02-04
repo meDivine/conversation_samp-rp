@@ -288,7 +288,7 @@ class Logs
                 'Player' => trim($cols[5]->nodeValue ?? null, "[]"),
                 'Reason' => str_replace('[', '',trim($cols[6]->nodeValue ?? null, "[]")) // выглядит некрасиво
             ];
-            if (!strstr('Kick', $nicknameColumns['Type']) || !strstr('SKick', $nicknameColumns['Type'])) {
+            if (!strstr('Kick', $nicknameColumns['Type']) && !strstr('SKick', $nicknameColumns['Type'])) {
                 $nicknames[] = $nicknameColumns;
             }
         }
