@@ -292,7 +292,7 @@ class Logs
                 $nicknames[] = $nicknameColumns;
             }
         }
-        unset($nicknames[0]);
+        //unset($nicknames[0]);
         return $nicknames ?? [];
     }
     /**
