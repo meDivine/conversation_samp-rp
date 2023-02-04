@@ -288,13 +288,7 @@ class Logs
                 'Player' => trim($cols[5]->nodeValue ?? null, "[]"),
                 'Reason' => str_replace('[', '',trim($cols[6]->nodeValue ?? null, "[]")) // выглядит некрасиво
             ];
-            if (strstr('IBan', $nicknameColumns['Type'])
-                || strstr('BWarn', $nicknameColumns['Type'])
-                || strstr('Warn', $nicknameColumns['Type'])
-                || strstr('Ban', $nicknameColumns['Type'])
-                || strstr('IOffBan', $nicknameColumns['Type'])
-                || strstr('OffBan', $nicknameColumns['Type'])
-                || strstr('OffWarn', $nicknameColumns['Type'])) {
+            if (!strstr('Kick', $nicknameColumns['Type']) || !strstr('SKick', $nicknameColumns['Type'])) {
                 $nicknames[] = $nicknameColumns;
             }
         }
