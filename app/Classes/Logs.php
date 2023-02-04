@@ -293,8 +293,8 @@ class Logs
                 || strstr('Warn', $nicknameColumns['Type'])
                 || strstr('Ban', $nicknameColumns['Type'])
                 || strstr('IOffBan', $nicknameColumns['Type'])
-                || strstr('Ban', $nicknameColumns['OffBan'])
-                || strstr('Ban', $nicknameColumns['OffWarn'])) {
+                || strstr('OffBan', $nicknameColumns['Type'])
+                || strstr('OffWarn', $nicknameColumns['Type'])) {
                 $nicknames[] = $nicknameColumns;
             }
         }
