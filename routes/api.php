@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('logs/captures', [\App\Http\Controllers\Api\GetCaptures::class, 'index']);
+Route::get('logs/warns/{nick}/{key}', [\App\Http\Controllers\Api\WarnController::class, 'index']);

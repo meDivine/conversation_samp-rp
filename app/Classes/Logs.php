@@ -3,6 +3,7 @@
 namespace App\Classes;
 
 use App\Models\Fraction;
+use Carbon\Carbon;
 use GuzzleHttp\Exception\GuzzleException;
 
 
@@ -258,6 +259,48 @@ class Logs
         unset($nicknames[0]);
         return $nicknames ?? [];
     }
+
+    /**
+     * @return array
+     * @throws GuzzleException
+     */
+    private function getPunishmentsApi() {
+        $logsTableResponse = new LogsTableResponse(
+            "kickban",
+            $this->nicknameOne,
+            null,
+            $this->dateStart,
+            $this->dateEnd,
+            "Player",
+            "Admin",
+            "time_diapzon_1",
+            "time_diapzon_2"
+        );
+        $table = $logsTableResponse->responseToLogsSampRp();
+        $rows = $this->tableToDom($table);
+        $nicknames = [];
+        foreach ($rows as $row) {
+            $cols = $row->getElementsByTagName('td'); // выберем все данные внутри тэга <td>
+            $nicknameColumns = [
+                'Date' => Carbon::parse(trim($cols[1]->nodeValue ?? null, "[]"))->format('d.m.y H:i'),
+                'Type' => trim($cols[3]->nodeValue ?? null, "[]"),
+                'Admin' => trim($cols[4]->nodeValue ?? null, "[]"),
+                'Player' => trim($cols[5]->nodeValue ?? null, "[]"),
+                'Reason' => str_replace('[', '',trim($cols[6]->nodeValue ?? null, "[]")) // выглядит некрасиво
+            ];
+            if (strstr('IBan', $nicknameColumns['Type'])
+                || strstr('BWarn', $nicknameColumns['Type'])
+                || strstr('Warn', $nicknameColumns['Type'])
+                || strstr('Ban', $nicknameColumns['Type'])
+                || strstr('IOffBan', $nicknameColumns['Type'])
+                || strstr('Ban', $nicknameColumns['OffBan'])
+                || strstr('Ban', $nicknameColumns['OffWarn'])) {
+                $nicknames[] = $nicknameColumns;
+            }
+        }
+        unset($nicknames[0]);
+        return $nicknames ?? [];
+    }
     /**
      * @throws GuzzleException
      */
@@ -270,6 +313,8 @@ class Logs
                 return $this->getNickNameLog();
             case "punishments_search":
                 return $this->getPunishments();
+            case "punishments_api_search":
+                return $this->getPunishmentsApi();
             case "ip_auth_search":
                 return $this->getIpAuth();
             case "warehouses_search":
